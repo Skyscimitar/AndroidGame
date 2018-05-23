@@ -15,7 +15,6 @@ public class CharacterSelctionFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         FragmentView v = new FragmentView(getContext(), character);
         v.draw();
         return v;

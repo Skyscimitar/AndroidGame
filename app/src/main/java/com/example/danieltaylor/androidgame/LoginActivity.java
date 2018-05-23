@@ -28,6 +28,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAuth = FirebaseAuth.getInstance();
+
         setContentView(R.layout.activity_login);
         btnSignIn = findViewById(R.id.btn_signin);
         btnSignUp = findViewById(R.id.btn_signup);
@@ -74,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else {
                             Log.d(TAG, "User creation failed");
+                            Log.d(TAG, task.getResult().toString());
                             Toast.makeText(getApplicationContext(), "Failed to create an account", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -92,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                         else {
                             Log.d(TAG, "failed to sign in");
                             Toast.makeText(getApplicationContext(), "Failed to sign in", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, task.getResult().toString());
                         }
                     }
                 });

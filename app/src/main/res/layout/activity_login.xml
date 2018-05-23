@@ -9,7 +9,8 @@
 
 
     <EditText
-        android:id="@+id/user_password"
+        android:id="@+id/user_email"
+        android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -21,7 +22,8 @@
         android:paddingRight="@dimen/text_entry_padding" />
 
     <EditText
-        android:id="@+id/user_email"
+        android:id="@+id/user_password"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
