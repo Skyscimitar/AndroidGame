@@ -4,48 +4,55 @@ import android.graphics.Bitmap;
 
 public class Character {
 
-    private double attack;
-    private double defense;
-    private double speed;
-    private double health;
+    private int attack;
+    private int defense;
+    private int speed;
+    private int health;
 
     private Bitmap frontappearance;
     private Bitmap backappearance;
     private Bitmap characterSelectionappearance;
 
-
-    public Character(double attack, double defense, double speed, Bitmap frontappearance, Bitmap backappearance, Bitmap characterSelectionappearance) {
+    public Character(int attack, int defense, int speed,Bitmap frontappearance, Bitmap backappearance, Bitmap characterSelectionappearance) {
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
+        this.health = 100;
         this.frontappearance = frontappearance;
         this.backappearance = backappearance;
         this.characterSelectionappearance = characterSelectionappearance;
-        this.health = 100;
     }
 
-    public double getAttack() {
+    public int getAttack() {
         return attack;
     }
 
-    public void setAttack(double attack) {
+    public void setAttack(int attack) {
         this.attack = attack;
     }
 
-    public double getDefense() {
+    public int getDefense() {
         return defense;
     }
 
-    public void setDefense(double defense) {
+    public void setDefense(int defense) {
         this.defense = defense;
     }
 
-    public double getSpeed() {
+    public int getSpeed() {
         return speed;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public Bitmap getFrontappearance() {
