@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.example.danieltaylor.androidgame.GameElements.Character;
 
 import com.example.danieltaylor.androidgame.R;
 
@@ -15,13 +16,21 @@ public class CharacterSelctionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.character_selection_window, container, false);
-        prepareView(v);
+        FragmentView v = new FragmentView(getContext(), character);
+        v.draw();
         return v;
     }
 
+    /**
+     * Default constructor necessary for fragments
+     */
     public CharacterSelctionFragment(){}
 
+    /**
+     *
+     * @param character the fragments character
+     * @return returns a fragment with the character as an argument
+     */
     public static CharacterSelctionFragment newInstance(Character character) {
         CharacterSelctionFragment csf = new CharacterSelctionFragment();
         csf.character = character;
@@ -29,9 +38,5 @@ public class CharacterSelctionFragment extends Fragment {
         Bundle args = new Bundle();
         csf.setArguments(args);
         return csf;
-    }
-
-    private void prepareView(View v){
-
     }
 }
