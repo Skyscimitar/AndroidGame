@@ -7,4 +7,5 @@
     <string name="btn_singleplayer">Single Player</string>
     <string name="btn_multiplayer">Multi Player</string>
     <string name="btn_leaderboard">Leaderboard</string>
+    <string name="btn_signout">Sign Out</string>
 </resources>

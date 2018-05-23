@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="142dp"
+        android:layout_marginTop="83dp"
         android:padding="@dimen/btn_padding"
         android:text="@string/btn_singleplayer" />
 
@@ -20,7 +20,9 @@
         android:id="@+id/btn_multiplayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="156dp"
         android:padding="@dimen/btn_padding"
         android:text="@string/btn_multiplayer" />
 
@@ -28,10 +30,19 @@
         android:id="@+id/btn_leaderboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="139dp"
+        android:layout_centerInParent="true"
         android:padding="@dimen/btn_padding"
         android:text="@string/btn_leaderboard" />
+
+
+    <Button
+        android:id="@+id/btn_signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="151dp"
+        android:padding="@dimen/btn_padding"
+        android:text="@string/btn_signout" />
 
 </RelativeLayout>

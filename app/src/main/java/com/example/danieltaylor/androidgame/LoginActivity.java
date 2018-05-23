@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "created new user");
                             Intent intent= new Intent(LoginActivity.this, MainMenuActivity.class);
+                            startActivity(intent);
                         }
                         else {
                             Log.d(TAG, "User creation failed");
@@ -92,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signed in successfully");
                             Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
+                            startActivity(intent);
                         }
                         else {
                             Log.d(TAG, "failed to sign in");
