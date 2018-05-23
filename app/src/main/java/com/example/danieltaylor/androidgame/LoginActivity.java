@@ -16,6 +16,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+//TODO change the title on the actionbar (or even remove it)
+
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
