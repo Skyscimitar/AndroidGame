@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "285033378653",
+    "firebase_url": "https://multiplayergame-8cc31.firebaseio.com",
+    "project_id": "multiplayergame-8cc31",
+    "storage_bucket": "multiplayergame-8cc31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285033378653:android:c5cc08526ef5495a",
+        "android_client_info": {
+          "package_name": "com.example.danieltaylor.androidgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285033378653-rk7fatg0t73vntvdoir470tp5gk3rbai.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.danieltaylor.androidgame",
+            "certificate_hash": "ef7ed4a9231ba0f153a3643f8a3416728bd86679"
+          }
+        },
+        {
+          "client_id": "285033378653-4vi8i21bj5i0j4jfsuuvup8ckhrqt8nv.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "285033378653-4vi8i21bj5i0j4jfsuuvup8ckhrqt8nv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-m5aamuK0m3vJuS3rzyr3nNk18C7UdGM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285033378653-4vi8i21bj5i0j4jfsuuvup8ckhrqt8nv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

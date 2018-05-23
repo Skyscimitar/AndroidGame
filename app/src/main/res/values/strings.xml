@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AndroidGame\\</string>
+    <string name="btn_signin">Sign In</string>
+    <string name="btn_signup">Sign Up</string>
+    <string name="login_email_hint">yourmailhere@email.com</string>
+    <string name="password_hint">password</string>
+    <string name="btn_singleplayer">Single Player</string>
+    <string name="btn_multiplayer">Multi Player</string>
+    <string name="btn_leaderboard">Leaderboard</string>
+</resources>
