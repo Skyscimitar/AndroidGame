@@ -8,4 +8,6 @@
     <string name="btn_multiplayer">Multi Player</string>
     <string name="btn_leaderboard">Leaderboard</string>
     <string name="btn_signout">Sign Out</string>
+    <string name="character_image_placeholder">Character image</string>
+    <string name="btn_confirm_character">Confirm Choice</string>
 </resources>

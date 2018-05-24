@@ -4,4 +4,6 @@
     <dimen name="btn_padding">20dp</dimen>
     <dimen name="text_entry_margin">100dp</dimen>
     <dimen name="text_entry_padding">50dp</dimen>
+    <dimen name="character_selection_frame_size">150dp</dimen>
+    <dimen name="character_selection_frame_margin">30dp</dimen>
 </resources>

@@ -1,10 +1,10 @@
 package com.example.danieltaylor.androidgame;
 
-import android.drm.DrmStore;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 public class CharacterSelectionActivity extends AppCompatActivity {
 
@@ -15,7 +15,17 @@ public class CharacterSelectionActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+    }
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
+
+    //provide correct up navigation
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainMenuActivity" />
-        <activity android:name=".CharacterSelectionActivity" />
+        <activity android:name=".CharacterSelectionActivity"
+            android:parentActivityName=".MainMenuActivity"/>
     </application>
 
 </manifest>
