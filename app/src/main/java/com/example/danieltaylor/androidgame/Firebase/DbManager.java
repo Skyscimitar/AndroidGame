@@ -33,6 +33,23 @@ public class DbManager {
         mReference.child(user.getId()).setValue(user);
     }
 
+    public void updateElo(UserMarker winner, UserMarker loser) {
+        int winnerElo = winner.getElo();
+        int loserElo = loser.getElo();
+
+        Double qWinner = Math.pow(10, ((double) winnerElo)/400);
+        Double qLoser = Math.pow(10, ((double) loserElo)/400);
+
+        Double winnerExpectancy = qWinner/(qWinner + qLoser);
+        Double loserExpectancy = qLoser/(qWinner + qLoser);
+
+        int newWinnerElo = (int) Math.floor(winnerElo + 24 * (1 - winnerExpectancy));
+        int newLoserElo = (int) Math.floor(loserElo + 24 * (0 - loserExpectancy));
+
+        winner.setElo(newWinnerElo);
+        loser.setElo(newLoserElo);
+    }
+
     public void getLeaderboard(final String login, final LeaderboardActivity activity) {
         DatabaseReference mReference = mDatabase.getReference();
         Query usersByEloQuery = mReference.child("users").orderByChild("elo");
