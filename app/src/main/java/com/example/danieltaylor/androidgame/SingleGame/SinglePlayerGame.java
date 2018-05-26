@@ -34,7 +34,7 @@ public class SinglePlayerGame {
     // user informs the game he has taken his turn
     public boolean takeTurn(Player player, JSONObject data){
         //make sure it's the player updating the data turn
-        if (playerList.get(currentPlayerTurnPosition) == player){
+        if (playerList.get(currentPlayerTurnPosition).getPlayerID().equals(player.getPlayerID())){
             updateGameData(data);
             return true;
         }
@@ -62,7 +62,7 @@ public class SinglePlayerGame {
 
     // tells the gameThread if it is the user's turn or not
     public boolean isPlayerTurn(Player player){
-        return playerList.get(currentPlayerTurnPosition) == player;
+        return playerList.get(currentPlayerTurnPosition).getPlayerID().equals(player.getPlayerID());
     }
 
     public boolean isGameRunning() {

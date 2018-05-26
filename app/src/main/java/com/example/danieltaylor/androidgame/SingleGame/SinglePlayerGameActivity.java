@@ -15,7 +15,7 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
 
         //TODO change the GameThread to a view
         setContentView(R.layout.activity_single_player_game);
-        gameThread = new SinglePlayerGameThread();
+        gameThread = new SinglePlayerGameThread(SinglePlayerGameActivity.this);
 
         //start the game
         gameThread.onStart();

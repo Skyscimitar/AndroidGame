@@ -14,6 +14,8 @@ public class Character {
     private Bitmap backappearance;
     private Bitmap characterSelectionappearance;
 
+    public Character() {}
+
     public Character(int attack, int defense, int speed,Bitmap frontappearance, Bitmap backappearance, Bitmap characterSelectionappearance) {
         this.attack = attack;
         this.defense = defense;
