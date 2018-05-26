@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.danieltaylor.androidgame.SingleGame.SinglePlayerGameActivity;
@@ -14,11 +15,39 @@ import com.example.danieltaylor.androidgame.SingleGame.SinglePlayerGameActivity;
 public class CharacterSelectionActivity extends AppCompatActivity implements View.OnClickListener {
 
     int characterSelected;
+    View character1;
+    View character2;
+    View character3;
+    View character4;
+    Button characterSelectionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_selection);
+
+        character1 = findViewById(R.id.character1);
+        character2 = findViewById(R.id.character2);
+        character3 = findViewById(R.id.character3);
+        character4 = findViewById(R.id.character4);
+        characterSelectionButton = findViewById(R.id.btn_confirm_character);
+
+        character1.setOnClickListener(this);
+        character2.setOnClickListener(this);
+        character3.setOnClickListener(this);
+        character4.setOnClickListener(this);
+        characterSelectionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (characterSelected != 0) {
+                    Intent intent = new Intent(CharacterSelectionActivity.this, SinglePlayerGameActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("character", characterSelected);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            }
+        });
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -38,40 +67,34 @@ public class CharacterSelectionActivity extends AppCompatActivity implements Vie
 
 
     public void onClick(View v){
-
         switch (v.getId()) {
+
             case R.id.character1:
                 if (characterSelected == 1) {
                     unSelectCharacter(2);
                 } else {
                     selectCharacter(1);
                 }
+
             case R.id.character2:
                 if (characterSelected == 2) {
                     unSelectCharacter(2);
                 } else {
                     selectCharacter(2);
                 }
+
             case R.id.character3:
                 if (characterSelected == 3) {
                     unSelectCharacter(3);
                 } else {
                     selectCharacter(3);
                 }
+
             case R.id.character4:
                 if (characterSelected == 4) {
                     unSelectCharacter(4);
                 } else {
                     selectCharacter(4);
-                }
-            case R.id.btn_confirm_character:
-                if (characterSelected != 0) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("character", characterSelected);
-                    //TODO change to game activity
-                    Intent intent = new Intent(getApplicationContext(), SinglePlayerGameActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
                 }
         }
     }

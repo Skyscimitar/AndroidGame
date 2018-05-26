@@ -1,10 +1,13 @@
 package com.example.danieltaylor.androidgame.SingleGame;
 
 import android.content.Context;
+import android.widget.ArrayAdapter;
 
 import com.example.danieltaylor.androidgame.GameElements.Player;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class SinglePlayerGameThread implements Runnable {
 
@@ -16,9 +19,13 @@ public class SinglePlayerGameThread implements Runnable {
     private Thread gameThread;
     private boolean userPlayerActed;
     private boolean aiPlayerActed;
+    private ArrayList<Player> playerArrayList;
 
     public SinglePlayerGameThread(){
         super();
+        playerArrayList.add(aiPlayer);
+        playerArrayList.add(userPlayer);
+        game = new SinglePlayerGame(playerArrayList);
     }
 
 
