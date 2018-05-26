@@ -14,6 +14,8 @@ public class SinglePlayerGameThread implements Runnable {
     private JSONObject gameData;
     private SinglePlayerGame game;
     private Thread gameThread;
+    private boolean userPlayerActed;
+    private boolean aiPlayerActed;
 
     public SinglePlayerGameThread(){
         super();
@@ -29,7 +31,22 @@ public class SinglePlayerGameThread implements Runnable {
     }
 
     //allows player turns to be taken
-    private void update(){}
+    private void update(){
+
+        if (game.isGameOver()) {
+            onPause();
+            endGame(game.getWinner());
+        }
+        // if the player inputted an action and it is his turn, update the gameData;
+        if (userPlayerActed && game.isPlayerTurn(userPlayer)) {
+            game.takeTurn(userPlayer, gameData);
+        }
+
+        //if the aiplayer inputted an action and it is his turn, update the gameData
+        if (aiPlayerActed && game.isPlayerTurn(aiPlayer)) {
+            game.takeTurn(aiPlayer, gameData);
+        }
+    }
 
     //updates the game view
     private void draw(){}
@@ -48,6 +65,8 @@ public class SinglePlayerGameThread implements Runnable {
         }
     }
 
+
+    private void endGame(Player winner){}
 
     public void onResume() {
         isRunning = game.isGameRunning();

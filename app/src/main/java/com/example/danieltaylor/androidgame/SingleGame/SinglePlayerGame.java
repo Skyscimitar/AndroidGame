@@ -14,9 +14,14 @@ public class SinglePlayerGame {
     private int currentPlayerTurnPosition = 0;
     private ArrayList<Player> playerList;
     private JSONObject data;
+    private Player winner;
 
     public SinglePlayerGame(ArrayList<Player> playerList){
         this.playerList = playerList;
+    }
+
+    public Player getWinner(){
+        return winner;
     }
 
 
@@ -41,11 +46,19 @@ public class SinglePlayerGame {
     private void updateGameData(JSONObject data){
         this.data = data;
         checkGameStatus();
+        incrementTurn();
     }
 
 
     //increments turn
-    public void incrementTurn(){}
+    public void incrementTurn(){
+        if (currentPlayerTurnPosition < playerList.size()) {
+            currentPlayerTurnPosition += 1;
+        }
+        else {
+            currentPlayerTurnPosition = 0;
+        }
+    }
 
     // tells the gameThread if it is the user's turn or not
     public boolean isPlayerTurn(Player player){
@@ -60,7 +73,14 @@ public class SinglePlayerGame {
         return isGameOver;
     }
 
-    private void checkGameStatus(){};
+    private void checkGameStatus(){
+
+        for (Player player:playerList) {
+            if (player.character.isDead()) {
+                player.loose();
+            }
+        }
+    };
 
 
 }

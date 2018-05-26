@@ -8,6 +8,7 @@ public class Character {
     private int defense;
     private int speed;
     private int health;
+    private boolean isDead = false;
 
     private Bitmap frontappearance;
     private Bitmap backappearance;
@@ -77,5 +78,19 @@ public class Character {
 
     public void setCharacterSelectionappearance(Bitmap characterSelectionappearance) {
         this.characterSelectionappearance = characterSelectionappearance;
+    }
+
+    public boolean isDead(){
+        return isDead;
+    }
+
+    public void takeDamage(Character character) {
+        int damage = character.getAttack() - this.getDefense();
+        if (damage > 0) {
+            this.setHealth(this.getHealth() - damage);
+        }
+        if (character.getHealth() <= 0) {
+            this.isDead = true;
+        }
     }
 }

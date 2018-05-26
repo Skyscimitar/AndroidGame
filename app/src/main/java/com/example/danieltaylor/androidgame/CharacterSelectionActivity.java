@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.example.danieltaylor.androidgame.SingleGame.SinglePlayerGameActivity;
 
 public class CharacterSelectionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -66,7 +69,7 @@ public class CharacterSelectionActivity extends AppCompatActivity implements Vie
                     Bundle bundle = new Bundle();
                     bundle.putInt("character", characterSelected);
                     //TODO change to game activity
-                    Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SinglePlayerGameActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -75,6 +78,9 @@ public class CharacterSelectionActivity extends AppCompatActivity implements Vie
 
     private void selectCharacter(int number) {
         this.characterSelected = number;
+        Toast.makeText(getApplicationContext(),
+                "selected character " + Integer.toString(characterSelected),
+                Toast.LENGTH_SHORT).show();
         //TODO update UI with the number
     }
 
