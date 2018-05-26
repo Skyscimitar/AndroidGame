@@ -1,10 +1,13 @@
 package com.example.danieltaylor.androidgame.SingleGame;
 
+import com.example.danieltaylor.androidgame.GameElements.Character;
 import com.example.danieltaylor.androidgame.GameElements.Player;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static android.icu.text.UnicodeSet.CASE;
 
 public class SinglePlayerGame {
 
@@ -13,7 +16,6 @@ public class SinglePlayerGame {
     private boolean isGameOver = false;
     private int currentPlayerTurnPosition = 0;
     private ArrayList<Player> playerList;
-    private JSONObject data;
     private Player winner;
 
     public SinglePlayerGame(ArrayList<Player> playerList){
@@ -32,10 +34,10 @@ public class SinglePlayerGame {
 
 
     // user informs the game he has taken his turn
-    public boolean takeTurn(Player player, JSONObject data){
+    public boolean takeTurn(Player player, String action){
         //make sure it's the player updating the data turn
         if (playerList.get(currentPlayerTurnPosition).getPlayerID().equals(player.getPlayerID())){
-            updateGameData(data);
+            updateGameData(player, action);
             return true;
         }
         return false;
@@ -43,10 +45,33 @@ public class SinglePlayerGame {
 
 
     //updates the game's data
-    private void updateGameData(JSONObject data){
-        this.data = data;
+    private void updateGameData(Player player, String action){
+        takeAction(player, action);
         checkGameStatus();
         incrementTurn();
+    }
+
+    private void takeAction(Player player, String action) {
+        switch (action){
+            case "ATTACK":
+                for (Player p:playerList) {
+                    if (!p.getPlayerID().equals(player.getPlayerID())) {
+                        p.character.takeDamage(player.character);
+                    }
+                    player.increasedDefense = false;
+                }
+            case "DEFEND":
+                if (!player.increasedDefense) {
+                    player.increasedDefense = true;
+                    player.character.setDefense(player.character.getDefense() + 3);
+                } else {
+                    player.increasedDefense = false;
+                }
+            case "HEAL":
+                player.character.setHealth(player.character.getHealth() + 10);
+                player.increasedDefense = false;
+        }
+
     }
 
 
@@ -74,13 +99,25 @@ public class SinglePlayerGame {
     }
 
     private void checkGameStatus(){
-
+        //used to track if someone lost this turn
+        boolean playerLost = false;
         for (Player player:playerList) {
             if (player.character.isDead()) {
                 player.loose();
+                playerLost = true;
             }
         }
-    };
+    }
+
+    public Player updatePlayer(Player player) {
+        Player updatedPlayer = new Player(new Character());
+        for (Player p:playerList) {
+            if (p.getPlayerID().equals(player.getPlayerID())){
+                updatedPlayer = p;
+            }
+        }
+        return updatedPlayer;
+    }
 
 
 }

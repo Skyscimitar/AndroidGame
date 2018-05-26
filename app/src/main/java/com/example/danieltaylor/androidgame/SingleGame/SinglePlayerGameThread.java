@@ -9,6 +9,7 @@ import com.example.danieltaylor.androidgame.GameElements.Character;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class SinglePlayerGameThread implements Runnable {
 
@@ -22,6 +23,8 @@ public class SinglePlayerGameThread implements Runnable {
     private Thread gameThread;
     private boolean userPlayerActed = false;
     private boolean aiPlayerActed = false;
+    private String userPlayerAction;
+    private String aiPlayerAction;
     private ArrayList<Player> playerArrayList = new ArrayList<>();
     public SinglePlayerGameActivity activity;
 
@@ -66,12 +69,23 @@ public class SinglePlayerGameThread implements Runnable {
         }
         // if the player inputted an action and it is his turn, update the gameData;
         if (userPlayerActed && game.isPlayerTurn(userPlayer)) {
-            game.takeTurn(userPlayer, gameData);
+            userPlayerActed = false;
+            game.takeTurn(userPlayer, userPlayerAction);
+            userPlayer = game.updatePlayer(userPlayer);
         }
 
         //if the aiplayer inputted an action and it is his turn, update the gameData
         if (aiPlayerActed && game.isPlayerTurn(aiPlayer)) {
-            game.takeTurn(aiPlayer, gameData);
+            aiPlayerActed = false;
+            game.takeTurn(aiPlayer, aiPlayerAction);
+            aiPlayer = game.updatePlayer(aiPlayer);
+        }
+
+        //if it's the ai turn, take a random action
+        if(game.isPlayerTurn(aiPlayer)) {
+            int ai = new Random().nextInt(2);
+            aiPlayerAction = actions.get(ai);
+            aiPlayerActed = true;
         }
     }
 

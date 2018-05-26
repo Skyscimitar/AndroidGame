@@ -6,6 +6,7 @@ public class Player {
 
     public Character character;
     private boolean hasLost = false;
+    public boolean increasedDefense = false;
     private String playerID;
 
     public Player(Character character){
