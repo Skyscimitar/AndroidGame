@@ -32,7 +32,17 @@ public class CharacterSelectionActivity extends AppCompatActivity implements Vie
         character4 = findViewById(R.id.character4);
         characterSelectionButton = findViewById(R.id.btn_confirm_character);
 
-        character1.setOnClickListener(this);
+        character1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (characterSelected == 1) {
+                    unSelectCharacter(1);
+                } else {
+                    selectCharacter(3);
+                }
+            }
+        });
+
         character2.setOnClickListener(this);
         character3.setOnClickListener(this);
         character4.setOnClickListener(this);
