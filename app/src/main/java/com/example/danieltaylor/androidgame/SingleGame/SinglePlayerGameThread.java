@@ -55,4 +55,10 @@ public class SinglePlayerGameThread implements Runnable {
         gameThread.start();
     }
 
+    public void onStart() {
+        game.startGame();
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
 }

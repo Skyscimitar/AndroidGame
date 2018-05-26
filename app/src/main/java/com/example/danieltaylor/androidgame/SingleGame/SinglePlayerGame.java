@@ -23,7 +23,6 @@ public class SinglePlayerGame {
     //starts the game, decides which player starts
     public void startGame(){
         this.running = true;
-
     }
 
 
