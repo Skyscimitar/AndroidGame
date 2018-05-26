@@ -17,9 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainMenuActivity" />
-        <activity android:name=".CharacterSelectionActivity"
-            android:parentActivityName=".MainMenuActivity"/>
-        <activity android:name=".LeaderboardActivity"></activity>
+        <activity
+            android:name=".CharacterSelectionActivity"
+            android:parentActivityName=".MainMenuActivity" />
+        <activity android:name=".LeaderboardActivity" />
+        <activity android:name=".SingleGame.SinglePlayerGameActivity"></activity>
     </application>
 
 </manifest>
