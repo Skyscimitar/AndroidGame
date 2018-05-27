@@ -1,6 +1,9 @@
 package com.example.danieltaylor.androidgame.GameElements;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.example.danieltaylor.androidgame.R;
 
 public class Character {
 
@@ -14,8 +17,10 @@ public class Character {
     private Bitmap frontappearance;
     private Bitmap backappearance;
     private Bitmap characterSelectionappearance;
+    private int number;
 
-    public Character() {}
+    public Character() {
+    }
 
     public Character(int attack, int defense, int speed,Bitmap frontappearance, Bitmap backappearance, Bitmap characterSelectionappearance) {
         this.attack = attack;

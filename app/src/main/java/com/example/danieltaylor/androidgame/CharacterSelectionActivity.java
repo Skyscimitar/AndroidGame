@@ -1,6 +1,8 @@
 package com.example.danieltaylor.androidgame;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ public class CharacterSelectionActivity extends AppCompatActivity implements Vie
     View character3;
     View character4;
     Button characterSelectionButton;
+    MediaPlayer music;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,9 @@ public class CharacterSelectionActivity extends AppCompatActivity implements Vie
         character2 = findViewById(R.id.character2);
         character3 = findViewById(R.id.character3);
         character4 = findViewById(R.id.character4);
+        
         characterSelectionButton = findViewById(R.id.btn_confirm_character);
+        music = MediaPlayer.create(CharacterSelectionActivity.this, R.raw.battle);
 
         character1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +63,9 @@ public class CharacterSelectionActivity extends AppCompatActivity implements Vie
                 }
             }
         });
+
+        music.setLooping(true);
+        music.start();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -121,4 +129,17 @@ public class CharacterSelectionActivity extends AppCompatActivity implements Vie
         this.characterSelected = 0;
         //TODO update UI with the number
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        music.stop();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        music.start();
+    }
+
 }
