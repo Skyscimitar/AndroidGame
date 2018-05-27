@@ -25,6 +25,7 @@
             android:name=".SingleGame.SinglePlayerGameActivity"
             android:theme="@style/generalnotitle">
         </activity>
+        <activity android:name=".MultiPlayerGame.MultiPlayerGameActivity"></activity>
     </application>
 
 </manifest>

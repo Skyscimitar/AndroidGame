@@ -33,6 +33,11 @@ public class DbManager {
         mReference.child(user.getId()).setValue(user);
     }
 
+    public void updateSinglePlayerWins(UserMarker user) {
+        int userWins = user.getSinglePlayerWins();
+        user.setSinglePlayerWins(userWins + 1);
+    }
+
     public void updateElo(UserMarker winner, UserMarker loser) {
         int winnerElo = winner.getElo();
         int loserElo = loser.getElo();
