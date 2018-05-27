@@ -22,6 +22,8 @@ public class Character {
     private int number;
 
     public Character() {
+        this.health = 100;
+        this.totalHealth = 100;
     }
 
     public Character(int attack, int defense, int speed,Bitmap frontappearance, Bitmap backappearance, Bitmap characterSelectionappearance) {
@@ -97,16 +99,6 @@ public class Character {
 
     public boolean isDead(){
         return isDead;
-    }
-
-    public void takeDamage(Character character) {
-        int damage = character.getAttack() - this.getDefense();
-        if (damage > 0) {
-            this.setHealth(this.getHealth() - damage);
-        }
-        if (character.getHealth() <= 0) {
-            this.isDead = true;
-        }
     }
 
     public int getGifResourceID() {

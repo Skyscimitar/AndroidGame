@@ -2,8 +2,14 @@ package com.example.danieltaylor.androidgame.SingleGame;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.danieltaylor.androidgame.GameElements.Player;
 import com.example.danieltaylor.androidgame.GameElements.Character;
@@ -34,7 +40,15 @@ public class SinglePlayerGameThread implements Runnable {
     SurfaceView playerHealth;
     private Resources res;
 
-    public SinglePlayerGameThread(SinglePlayerGameActivity activity, Resources res){
+    private Button attack_btn;
+    private Button defend_btn;
+    private Button heal_btn;
+    private TextView playerCharacterHealth;
+    private TextView aiCharacterHealth;
+    private Random random = new Random();
+
+    public SinglePlayerGameThread(SinglePlayerGameActivity activity, Resources res, Player userPlayer,
+                                  Player aiPlayer){
 
         super();
 
@@ -45,19 +59,50 @@ public class SinglePlayerGameThread implements Runnable {
         actions.add("DEFEND");
         actions.add("HEAL");
 
-        Character playerCharacter = new Character();
-        Character aiCharacter = new Character();
+        this.aiPlayer = aiPlayer;
+        this.userPlayer = userPlayer;
 
-        aiPlayer = new Player(playerCharacter);
-        userPlayer = new Player(aiCharacter);
+        attack_btn = activity.attack_btn;
+        defend_btn = activity.defend_btn;
+        heal_btn = activity.heal_btn;
 
-        //TODO set the image views to display the correct character sprites
+        playerCharacterHealth = activity.playerCharacterHealth;
+        aiCharacterHealth = activity.enemyCharacterHealth;
+
+
+        //set onClickListeners to register the user's controls.
+        attack_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userPlayerActed = true;
+                userPlayerAction = "ATTACK";
+                disableInput();
+            }
+        });
+
+        defend_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userPlayerActed = true;
+                userPlayerAction = "DEFEND";
+                disableInput();
+            }
+        });
+
+        heal_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userPlayerActed = true;
+                userPlayerAction = "HEAL";
+                disableInput();
+            }
+        });
 
 
         playerArrayList.add(aiPlayer);
         playerArrayList.add(userPlayer);
 
-        game = new SinglePlayerGame(playerArrayList);
+        game = new SinglePlayerGame(playerArrayList, userPlayer, aiPlayer);
     }
 
 
@@ -73,7 +118,7 @@ public class SinglePlayerGameThread implements Runnable {
     private void update(){
 
         if (game.isGameOver()) {
-            onPause();
+            isRunning = false;
             endGame(game.getWinner());
         }
         // if the player inputted an action and it is his turn, update the gameData;
@@ -92,7 +137,7 @@ public class SinglePlayerGameThread implements Runnable {
 
         //if it's the ai turn, take a random action
         if(game.isPlayerTurn(aiPlayer)) {
-            int ai = new Random().nextInt(3) + 1;
+            int ai = random.nextInt(3);
             aiPlayerAction = actions.get(ai);
             aiPlayerActed = true;
         }
@@ -101,18 +146,28 @@ public class SinglePlayerGameThread implements Runnable {
     //updates the game view
     private void draw() {
         //update the ui based on the current game state
-        //update user player health
+        //update user player
+        activity.updateUserPlayer(userPlayer);
 
-        //TODO update surface view
+        //update ai player
+        activity.updateEnemyPlayer(aiPlayer);
 
-
-        //update ai player health
-
-        //TODO update surface view
+        activity.updateText();
     }
 
     //registers player controls
-    private void control(){}
+    private void control(){
+        try {
+            //wait so the user can see the cpu's activity
+            gameThread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (game.isPlayerTurn(userPlayer)) {
+            //enable the input if it is the player's turn
+            enableInput();
+        }
+    }
 
 
     public void onPause(){
@@ -121,12 +176,20 @@ public class SinglePlayerGameThread implements Runnable {
             gameThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
-            //TODO handle interruption exception correctly
         }
     }
 
 
-    private void endGame(Player winner){}
+    private void endGame(Player winner){
+        Log.e("GT", "Game end fct called");
+        try {
+            Looper.prepare();
+            activity.endGame(winner);
+            gameThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void onResume() {
         isRunning = game.isGameRunning();
@@ -140,21 +203,18 @@ public class SinglePlayerGameThread implements Runnable {
         gameThread.start();
     }
 
-    public void onReceivePlayerControl(String action) {
-        switch (action) {
-            case "ATTACK":
-                userPlayerActed = true;
-                userPlayerAction = action;
-            case "DEFEND":
-                userPlayerActed = true;
-                userPlayerAction = action;
-            case "HEAL":
-                userPlayerActed = true;
-                userPlayerAction = action;
-        }
 
-        //TODO update ui based on the players choice
+    //prevent the user from acting
+    private void disableInput() {
+        attack_btn.setClickable(false);
+        defend_btn.setClickable(false);
+        heal_btn.setClickable(false);
     }
 
+    private void enableInput() {
+        attack_btn.setClickable(true);
+        defend_btn.setClickable(true);
+        heal_btn.setClickable(true);
+    }
 
 }

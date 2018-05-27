@@ -17,9 +17,14 @@ public class SinglePlayerGame {
     private int currentPlayerTurnPosition = 0;
     private ArrayList<Player> playerList;
     private Player winner;
+    private Player userPlayer;
+    private Player aiPlayer;
 
-    public SinglePlayerGame(ArrayList<Player> playerList){
+    public SinglePlayerGame(ArrayList<Player> playerList,Player userPlayer, Player aiPlayer){
         this.playerList = playerList;
+        this.userPlayer = userPlayer;
+        this.aiPlayer = aiPlayer;
+
     }
 
     public Player getWinner(){
@@ -54,22 +59,47 @@ public class SinglePlayerGame {
     private void takeAction(Player player, String action) {
         switch (action){
             case "ATTACK":
-                for (Player p:playerList) {
-                    if (!p.getPlayerID().equals(player.getPlayerID())) {
-                        p.character.takeDamage(player.character);
+                if (player.getPlayerID().equals(userPlayer.getPlayerID())) {
+                    aiPlayer = takeDamage(aiPlayer, player);
+                    if (userPlayer.increasedDefense) {
+                        userPlayer.increasedDefense = false;
+                        userPlayer.character.setDefense(player.character.getDefense() - 3);
                     }
-                    player.increasedDefense = false;
+
+                } else {
+                    userPlayer = takeDamage(userPlayer, player);
+                    if (aiPlayer.increasedDefense) {
+                        aiPlayer.increasedDefense = false;
+                        aiPlayer.character.setDefense(player.character.getDefense() - 3);
+                    }
                 }
             case "DEFEND":
-                if (!player.increasedDefense) {
-                    player.increasedDefense = true;
-                    player.character.setDefense(player.character.getDefense() + 3);
+                if (player.getPlayerID().equals(userPlayer.getPlayerID())) {
+                    if (!userPlayer.increasedDefense) {
+                        userPlayer.increasedDefense = true;
+                        userPlayer.character.setDefense(player.character.getDefense() + 3);
+                    }
                 } else {
-                    player.increasedDefense = false;
+                    if (!aiPlayer.increasedDefense) {
+                        aiPlayer.increasedDefense = true;
+                        aiPlayer.character.setDefense(player.character.getDefense() + 3);
+                    }
                 }
             case "HEAL":
-                player.character.setHealth(player.character.getHealth() + 10);
-                player.increasedDefense = false;
+                if (player.getPlayerID().equals(userPlayer.getPlayerID())) {
+                    userPlayer = healCharacter(userPlayer);
+                    if (userPlayer.increasedDefense) {
+                        userPlayer.increasedDefense = false;
+                        userPlayer.character.setDefense(player.character.getDefense() - 3);
+                    }
+
+                } else {
+                    aiPlayer = healCharacter(aiPlayer);
+                    if (aiPlayer.increasedDefense) {
+                        aiPlayer.increasedDefense = false;
+                        aiPlayer.character.setDefense(player.character.getDefense() - 3);
+                    }
+                }
         }
 
     }
@@ -77,12 +107,13 @@ public class SinglePlayerGame {
 
     //increments turn
     public void incrementTurn(){
-        if (currentPlayerTurnPosition < playerList.size()) {
+        if (currentPlayerTurnPosition < playerList.size()-1) {
             currentPlayerTurnPosition += 1;
         }
         else {
             currentPlayerTurnPosition = 0;
         }
+        turnCounter += 1;
     }
 
     // tells the gameThread if it is the user's turn or not
@@ -100,12 +131,15 @@ public class SinglePlayerGame {
 
     private void checkGameStatus(){
         //used to track if someone lost this turn
-        boolean playerLost = false;
-        for (Player player:playerList) {
-            if (player.character.isDead()) {
-                player.loose();
-                playerLost = true;
-            }
+        if (aiPlayer.character.getHealth() <= 0) {
+            winner = userPlayer;
+            isGameOver = true;
+            running = false;
+        }
+        if (userPlayer.character.getHealth() <= 0) {
+            winner = aiPlayer;
+            isGameOver = true;
+            running = false;
         }
     }
 
@@ -119,5 +153,23 @@ public class SinglePlayerGame {
         return updatedPlayer;
     }
 
+    private Player takeDamage(Player victim, Player attacker) {
+        int damage = attacker.character.getAttack() - victim.character.getDefense();
+        //in certain conditions if a player has increased his defense this can happen
+        if (damage <= 0) {
+            damage = 1;
+        }
+        victim.character.setHealth(victim.character.getHealth() - damage);
+        return victim;
+    }
+
+    private Player healCharacter(Player player) {
+        int newHealth = player.character.getHealth() + 10;
+        if (newHealth >= player.character.getTotalHealth()) {
+            newHealth = player.character.getTotalHealth();
+        }
+        player.character.setHealth(newHealth);
+        return player;
+    }
 
 }
