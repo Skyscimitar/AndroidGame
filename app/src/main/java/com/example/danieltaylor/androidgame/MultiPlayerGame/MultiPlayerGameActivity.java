@@ -97,7 +97,7 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
 
         mMatch = match;
 
-        String myParticipantId = mMatch.getParticipantId(mMyPlayerId);
+        String myParticipantId = match.getParticipantId(mMyPlayerId);
 
         Games.getTurnBasedMultiplayerClient(this, GoogleSignIn.getLastSignedInAccount(this)).takeTurn(match.getMatchId(),
                 mTurnData.persist(), myParticipantId)
