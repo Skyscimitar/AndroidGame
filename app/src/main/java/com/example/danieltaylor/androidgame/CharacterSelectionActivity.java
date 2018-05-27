@@ -26,7 +26,7 @@ public class CharacterSelectionActivity extends AppCompatActivity implements Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_selection);
-        String mode = savedInstanceState.getBundle("mode").toString();
+        String mode = getIntent().getExtras().getString("mode");
 
         character1 = findViewById(R.id.character1);
         character2 = findViewById(R.id.character2);
