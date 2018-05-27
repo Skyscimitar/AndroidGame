@@ -5,4 +5,5 @@
     <color name="colorAccent">#0022A8</color>
     <color name="colorSecondary">#56CFE0</color>
     <color name="colorSecondaryDark">#1C8BE5</color>
+    <color name="activityBackground">#1D3557</color>
 </resources>

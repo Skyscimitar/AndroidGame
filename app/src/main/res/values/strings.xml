@@ -13,7 +13,7 @@
     <string name="btn_attack">Attack</string>
     <string name="btn_defend">Defend</string>
     <string name="btn_heal">Heal</string>
-    <string name="current_health_text">Current Health: %value$i/%total$i</string>
+    <string name="current_health_text">Current Health: %1$d/%2$d</string>
     <string name="character_attack">Attack: %1$d</string>
     <string name="character_defense">Defense: %1$d</string>
     <string name="character_speed">Speed: %1$d</string>

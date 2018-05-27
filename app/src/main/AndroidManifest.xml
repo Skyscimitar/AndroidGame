@@ -23,7 +23,7 @@
         <activity android:name=".LeaderboardActivity" />
         <activity
             android:name=".SingleGame.SinglePlayerGameActivity"
-            android:theme="@style/generalnotitle">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity android:name=".MultiPlayerGame.MultiPlayerGameActivity"></activity>
     </application>

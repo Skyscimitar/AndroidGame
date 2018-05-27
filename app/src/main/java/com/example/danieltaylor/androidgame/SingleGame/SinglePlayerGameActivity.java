@@ -22,7 +22,7 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
     public TextView enemyHealthText;
     public ImageView playerCharacter;
     public ImageView enemyCharacter;
-    private Resources res = getResources();
+    private Resources res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,8 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
 
         //TODO change the GameThread to a view
         setContentView(R.layout.activity_single_player_game);
+
+        res = getResources();
 
         btnAttack = findViewById(R.id.btn_attack);
         btnDefend = findViewById(R.id.btn_defend);
