@@ -102,15 +102,11 @@ public class SinglePlayerGameThread implements Runnable {
     private void draw() {
         //update the ui based on the current game state
         //update user player health
-        activity.playerHealthText.setText(res.getString(R.string.current_health_text,
-                userPlayer.character.getHealth(), userPlayer.character.getTotalHealth()));
 
         //TODO update surface view
 
 
         //update ai player health
-        activity.enemyHealthText.setText(res.getString(R.string.current_health_text,
-                aiPlayer.character.getHealth(), aiPlayer.character.getTotalHealth()));
 
         //TODO update surface view
     }

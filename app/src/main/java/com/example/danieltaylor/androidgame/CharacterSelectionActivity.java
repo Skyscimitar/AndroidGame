@@ -91,6 +91,8 @@ public class CharacterSelectionActivity extends AppCompatActivity {
         characterSelectionButton = findViewById(R.id.btn_confirm_character);
         music = MediaPlayer.create(CharacterSelectionActivity.this, R.raw.battle);
 
+        //TODO fix onClickListeners activiting multiple views at the same time
+
         character1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

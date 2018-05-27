@@ -1,6 +1,7 @@
 package com.example.danieltaylor.androidgame.SingleGame;
 
 import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.SurfaceView;
@@ -8,20 +9,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.danieltaylor.androidgame.GameElements.GifImageView;
 import com.example.danieltaylor.androidgame.R;
 
 public class SinglePlayerGameActivity extends AppCompatActivity {
 
     private SinglePlayerGameThread gameThread;
-    public Button btnAttack;
-    public Button btnDefend;
-    public Button btnHeal;
-    public SurfaceView playerHealth;
-    public SurfaceView enemyHealth;
-    public TextView playerHealthText;
-    public TextView enemyHealthText;
-    public ImageView playerCharacter;
-    public ImageView enemyCharacter;
+    private GifImageView playerCharacterGif;
+    private GifImageView enemyCharacterGif;
+    private MediaPlayer music;
+
     private Resources res;
 
     @Override
@@ -31,19 +28,24 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
         //TODO change the GameThread to a view
         setContentView(R.layout.activity_single_player_game);
 
+        //TODO assign the ai a character
+        //TODO pass the character selected by the player through the bundle
+
         res = getResources();
 
-        btnAttack = findViewById(R.id.btn_attack);
-        btnDefend = findViewById(R.id.btn_defend);
-        btnHeal = findViewById(R.id.btn_heal);
-        playerHealth = findViewById(R.id.player_character_health);
-        enemyHealth = findViewById(R.id.enemy_character_health);
-        playerHealthText = findViewById(R.id.player_character_health_text);
-        enemyHealthText = findViewById(R.id.enemy_character_health_text);
+        music = MediaPlayer.create(getApplicationContext(), R.raw.almostdead);
+        music.setLooping(true);
+
+        playerCharacterGif = findViewById(R.id.player_character_gif);
+        playerCharacterGif.setGifImageResource(R.drawable.character1idle);
+
+        enemyCharacterGif = findViewById(R.id.enemy_character_gif);
+        enemyCharacterGif.setGifImageResource(R.drawable.character2idle);
 
         gameThread = new SinglePlayerGameThread(SinglePlayerGameActivity.this, res);
 
         //start the game
+        music.start();
         gameThread.onStart();
     }
 
@@ -52,6 +54,7 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        music.start();
         gameThread.onResume();
     }
 
@@ -60,6 +63,7 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        music.pause();
         gameThread.onPause();
     }
 }

@@ -11,4 +11,5 @@
     <dimen name="character_selection_text_margin">4dp</dimen>
     <dimen name="text_input_min_width">100dp</dimen>
     <dimen name="text_input_top_bottom_padding">5dp</dimen>
+    <dimen name="action_button_bar_height">100dp</dimen>
 </resources>
