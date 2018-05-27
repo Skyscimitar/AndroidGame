@@ -6,6 +6,7 @@ public class UserMarker {
     private String password;
     private String email;
     private int elo;
+    private int singlePlayerWins;
 
     public UserMarker() {}
 
@@ -15,6 +16,7 @@ public class UserMarker {
         this.password = password;
         this.email = email;
         this.elo = 1500;
+        this.singlePlayerWins = 0;
     }
 
     public String getId() {
@@ -56,5 +58,13 @@ public class UserMarker {
 
     public void setElo(int elo) {
         this.elo = elo;
+    }
+
+    public int getSinglePlayerWins() {
+        return singlePlayerWins;
+    }
+
+    public void setSinglePlayerWins(int wins) {
+        this.singlePlayerWins = wins;
     }
 }
