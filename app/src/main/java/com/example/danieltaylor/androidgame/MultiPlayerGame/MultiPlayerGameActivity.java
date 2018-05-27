@@ -68,13 +68,10 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<TurnBasedMatch> task) {
                     if (task.isSuccessful()) {
                         TurnBasedMatch match = task.getResult();
-                        if (match.getData() == null) {
-                            // First turn, initialize game data
-                            // TODO implement this -> set characters for each player initializeGameData(match);
-
+                        if (match.getData() != null) {
+                            updateMatch(match);
                         }
-                        // Show turn UI
-                        // TODO showTurnUI(match);
+                        startMatch(match);
                     } else {
                         // Error encountered
                         int status = CommonStatusCodes.DEVELOPER_ERROR;
