@@ -1,6 +1,8 @@
 package com.example.danieltaylor.androidgame.MultiPlayerGame;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +27,13 @@ import java.util.ArrayList;
 public class MultiPlayerGameActivity extends AppCompatActivity {
 
     private static final int RC_SELECT_PLAYERS = 9010;
+
+    public TurnBasedMatch mMatch;
+    public Turn mTurnData;
+
+
+    private String mMyPlayerId; // TODO set ce truc, je sais pas trop ou
+    private AlertDialog mAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +70,11 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
                         TurnBasedMatch match = task.getResult();
                         if (match.getData() == null) {
                             // First turn, initialize game data
-                            // TODO implement this -> set characters for each player
-                            //initializeGameData(match);
+                            // TODO implement this -> set characters for each player initializeGameData(match);
+
                         }
                         // Show turn UI
-                        //showTurnUI(match);
+                        // TODO showTurnUI(match);
                     } else {
                         // Error encountered
                         int status = CommonStatusCodes.DEVELOPER_ERROR;
@@ -74,11 +83,32 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
                             ApiException apiException = (ApiException) exception;
                             status = apiException.getStatusCode();
                         }
-                        //handleError(status, exception);
+                        // Handle exception
+
                     }
                 }
             });
         }
+    }
+
+    public void startMatch(TurnBasedMatch match) {
+        mTurnData = new Turn();
+        // Some basic turn data
+        mTurnData.data = "First turn";
+
+        mMatch = match;
+
+        String myParticipantId = mMatch.getParticipantId(mMyPlayerId);
+
+        Games.getTurnBasedMultiplayerClient(this, GoogleSignIn.getLastSignedInAccount(this)).takeTurn(match.getMatchId(),
+                mTurnData.persist(), myParticipantId)
+                .addOnSuccessListener(new OnSuccessListener<TurnBasedMatch>() {
+                    @Override
+                    public void onSuccess(TurnBasedMatch turnBasedMatch) {
+                        updateMatch(turnBasedMatch);
+                    }
+                });
+                // Handle exception?
     }
 
     private void playTurn(TurnBasedMatch match) {
@@ -86,20 +116,21 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
 
         // This calls a game specific method to get the bytes that represent the game state
         // including the current player's turn.
-        //byte[] gameData = serializeGameData();
 
-        //Games.getTurnBasedMultiplayerClient(this, GoogleSignIn.getLastSignedInAccount(this))
-        //        .takeTurn(match.getMatchId(), gameData, nextParticipantId)
-         //       .addOnCompleteListener(new OnCompleteListener<TurnBasedMatch>() {
-        //            @Override
-         //           public void onComplete(@NonNull Task<TurnBasedMatch> task) {
-          //              if (task.isSuccessful()) {
-           //                 TurnBasedMatch match = task.getResult();
-            //            } else {
-             //               // Handle exceptions.
-              //          }
-               //     }
-                //});
+        // byte[] gameData = serializeGameData(); j'ai pas compris ce bail
+
+        /*Games.getTurnBasedMultiplayerClient(this, GoogleSignIn.getLastSignedInAccount(this))
+                .takeTurn(match.getMatchId(), mTurnData.persist(), nextParticipantId)
+                .addOnCompleteListener(new OnCompleteListener<TurnBasedMatch>() {
+                    @Override
+                    public void onComplete(@NonNull Task<TurnBasedMatch> task) {
+                        if (task.isSuccessful()) {
+                            TurnBasedMatch match = task.getResult();
+                        } else {
+                            // Handle exceptions
+                        }
+                    }
+                });*/
     }
 
     public void onStartMatchClicked(View view) {
@@ -112,6 +143,53 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
                         startActivityForResult(intent, RC_SELECT_PLAYERS);
                     }
                 });
+    }
+
+    public void updateMatch(TurnBasedMatch match) {
+        mMatch = match;
+
+        int status = match.getStatus();
+        int turnStatus = match.getTurnStatus();
+
+        switch (status) {
+            case TurnBasedMatch.MATCH_STATUS_CANCELED:
+                showWarning("Canceled!", "This game was canceled!");
+                return;
+            case TurnBasedMatch.MATCH_STATUS_EXPIRED:
+                showWarning("Expired!", "This game is expired.  So sad!");
+                return;
+            case TurnBasedMatch.MATCH_STATUS_AUTO_MATCHING:
+                showWarning("Waiting for auto-match...",
+                        "We're still waiting for an automatch partner.");
+                return;
+            case TurnBasedMatch.MATCH_STATUS_COMPLETE:
+                if (turnStatus == TurnBasedMatch.MATCH_TURN_STATUS_COMPLETE) {
+                    showWarning("Complete!",
+                            "This game is over; someone finished it, and so did you!  " +
+                                    "There is nothing to be done.");
+                    break;
+                }
+                // Note that in this state, you must still call "Finish" yourself,
+                // so we allow this to continue.
+                showWarning("Complete!",
+                        "This game is over; someone finished it!  You can only finish it now.");
+        }
+        // OK, it's active. Check on turn status.
+        switch (turnStatus) {
+            case TurnBasedMatch.MATCH_TURN_STATUS_MY_TURN:
+                mTurnData = Turn.unpersist(mMatch.getData());
+                // TODO showTurnUI(mMatch);
+                return;
+            case TurnBasedMatch.MATCH_TURN_STATUS_THEIR_TURN:
+                // Should return results.
+                showWarning("Alas...", "It's not your turn.");
+                break;
+            case TurnBasedMatch.MATCH_TURN_STATUS_INVITED:
+                showWarning("Good inititative!",
+                        "Still waiting for invitations.\n\nBe patient!");
+        }
+
+        mTurnData = null;
     }
 
     public String getNextParticipantId(String myPlayerId, TurnBasedMatch match) {
@@ -139,5 +217,28 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
             // person to play against.
             return null;
         }
+    }
+
+    public void showWarning(String title, String message) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        // set title
+        alertDialogBuilder.setTitle(title).setMessage(message);
+
+        // set dialog message
+        alertDialogBuilder.setCancelable(false).setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, close
+                        // current activity
+                    }
+                });
+
+        // create alert dialog
+        mAlertDialog = alertDialogBuilder.create();
+
+        // show it
+        mAlertDialog.show();
     }
 }
