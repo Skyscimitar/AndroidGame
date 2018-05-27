@@ -21,7 +21,8 @@
             android:name=".CharacterSelectionActivity"
             android:parentActivityName=".MainMenuActivity" />
         <activity android:name=".LeaderboardActivity" />
-        <activity android:name=".SingleGame.SinglePlayerGameActivity"></activity>
+        <activity android:name=".SingleGame.SinglePlayerGameActivity" />
+        <activity android:name=".MultiPlayerGame.MultiPlayerGameActivity"></activity>
     </application>
 
 </manifest>
