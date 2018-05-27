@@ -6,4 +6,5 @@
     <dimen name="text_entry_padding">50dp</dimen>
     <dimen name="character_selection_frame_size">150dp</dimen>
     <dimen name="character_selection_frame_margin">30dp</dimen>
+    <dimen name="chareter_size_battle">200dp</dimen>
 </resources>

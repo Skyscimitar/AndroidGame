@@ -10,4 +10,7 @@
     <string name="btn_signout">Sign Out</string>
     <string name="character_image_placeholder">Character image</string>
     <string name="btn_confirm_character">Confirm Choice</string>
+    <string name="btn_attack">Attack</string>
+    <string name="btn_defend">Defend</string>
+    <string name="btn_heal">Heal</string>
 </resources>

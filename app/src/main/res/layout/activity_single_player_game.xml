@@ -1,9 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SingleGame.SinglePlayerGameActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/player_character_health_text"
+        android:layout_width="92dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/enemy_character_health"
+        android:layout_marginBottom="87dp" />
+
+    <TextView
+        android:id="@+id/enemy_character_health_text"
+        android:layout_width="61dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/player_character_health"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="47dp" />
+
+    <ImageView
+        android:id="@+id/player_character"
+        android:layout_width="@dimen/chareter_size_battle"
+        android:layout_height="@dimen/chareter_size_battle"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="13dp"
+        android:contentDescription="@string/character_image_placeholder" />
+
+    <SurfaceView
+        android:id="@+id/player_character_health"
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="20dp" />
+
+    <ImageView
+        android:id="@+id/enemy_character"
+        android:layout_width="@dimen/chareter_size_battle"
+        android:layout_height="@dimen/chareter_size_battle"
+        android:layout_alignBottom="@+id/player_character_health_text"
+        android:layout_alignStart="@+id/player_character_health"
+        android:contentDescription="@string/character_image_placeholder" />
+
+    <SurfaceView
+        android:id="@+id/enemy_character_health"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="115dp" />
+
+    <Button
+        android:id="@+id/btn_attack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="18dp"
+        android:layout_marginStart="35dp"
+        android:text="@string/btn_attack" />
+
+    <Button
+        android:id="@+id/btn_defend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_attack"
+        android:layout_centerHorizontal="true"
+        android:text="@string/btn_defend" />
+
+    <Button
+        android:id="@+id/btn_heal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/btn_attack"
+        android:layout_marginEnd="42dp"
+        android:text="@string/btn_heal" />
+
+</RelativeLayout>
