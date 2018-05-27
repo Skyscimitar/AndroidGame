@@ -26,7 +26,7 @@ public class SinglePlayerGameThread implements Runnable {
 
     private Player aiPlayer;
     private Player userPlayer;
-    private boolean isRunning;
+    public boolean isRunning;
     private JSONObject gameData;
     private SinglePlayerGame game;
     private Thread gameThread;
@@ -40,6 +40,7 @@ public class SinglePlayerGameThread implements Runnable {
     SurfaceView playerHealth;
     private Resources res;
 
+    public Player winner;
     private Button attack_btn;
     private Button defend_btn;
     private Button heal_btn;
@@ -183,11 +184,8 @@ public class SinglePlayerGameThread implements Runnable {
     private void endGame(Player winner){
         Log.e("GT", "Game end fct called");
         try {
-            //tell the thread it can allow the handler to do its work
             Looper.prepare();
-            //this is the handler ->
             activity.endGame(winner);
-            //end the thread safely once the activity is done with its work
             gameThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();

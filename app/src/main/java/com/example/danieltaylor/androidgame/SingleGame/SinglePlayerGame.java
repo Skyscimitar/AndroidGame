@@ -58,52 +58,53 @@ public class SinglePlayerGame {
 
     private void takeAction(Player player, String action) {
         //TODO optimize the code -> the same code should be used for the aiPlayer and the userPlayer updates
-        switch (action){
-            case "ATTACK":
-                if (player.getPlayerID().equals(userPlayer.getPlayerID())) {
-                    aiPlayer = takeDamage(aiPlayer, player);
-                    if (userPlayer.increasedDefense) {
-                        userPlayer.increasedDefense = false;
-                        userPlayer.character.setDefense(player.character.getDefense() - 3);
-                    }
+        if (action.equals("ATTACK")) {
+            if (player.getPlayerID().equals(userPlayer.getPlayerID())) {
+                aiPlayer = takeDamage(aiPlayer, player);
+                if (userPlayer.increasedDefense) {
+                    userPlayer.increasedDefense = false;
+                    userPlayer.character.setDefense(player.character.getDefense() - 3);
+                }
 
-                } else {
-                    userPlayer = takeDamage(userPlayer, player);
-                    if (aiPlayer.increasedDefense) {
-                        aiPlayer.increasedDefense = false;
-                        aiPlayer.character.setDefense(player.character.getDefense() - 3);
-                    }
+            } else {
+                userPlayer = takeDamage(userPlayer, player);
+                if (aiPlayer.increasedDefense) {
+                    aiPlayer.increasedDefense = false;
+                    aiPlayer.character.setDefense(player.character.getDefense() - 3);
                 }
-            case "DEFEND":
-                if (player.getPlayerID().equals(userPlayer.getPlayerID())) {
-                    if (!userPlayer.increasedDefense) {
-                        userPlayer.increasedDefense = true;
-                        userPlayer.character.setDefense(player.character.getDefense() + 3);
-                    }
-                } else {
-                    if (!aiPlayer.increasedDefense) {
-                        aiPlayer.increasedDefense = true;
-                        aiPlayer.character.setDefense(player.character.getDefense() + 3);
-                    }
-                }
-            case "HEAL":
-                if (player.getPlayerID().equals(userPlayer.getPlayerID())) {
-                    userPlayer = healCharacter(userPlayer);
-                    if (userPlayer.increasedDefense) {
-                        userPlayer.increasedDefense = false;
-                        userPlayer.character.setDefense(player.character.getDefense() - 3);
-                    }
-
-                } else {
-                    aiPlayer = healCharacter(aiPlayer);
-                    if (aiPlayer.increasedDefense) {
-                        aiPlayer.increasedDefense = false;
-                        aiPlayer.character.setDefense(player.character.getDefense() - 3);
-                    }
-                }
+            }
         }
+        if (action.equals("DEFEND")) {
+            if (player.getPlayerID().equals(userPlayer.getPlayerID())) {
+                if (!userPlayer.increasedDefense) {
+                    userPlayer.increasedDefense = true;
+                    userPlayer.character.setDefense(player.character.getDefense() + 3);
+                }
+            } else {
+                if (!aiPlayer.increasedDefense) {
+                    aiPlayer.increasedDefense = true;
+                    aiPlayer.character.setDefense(player.character.getDefense() + 3);
+                }
+            }
+        }
+        if (action.equals("HEAL")) {
+            if (player.getPlayerID().equals(userPlayer.getPlayerID())) {
+                userPlayer = healCharacter(userPlayer);
+                if (userPlayer.increasedDefense) {
+                    userPlayer.increasedDefense = false;
+                    userPlayer.character.setDefense(player.character.getDefense() - 3);
+                }
 
+            } else {
+                aiPlayer = healCharacter(aiPlayer);
+                if (aiPlayer.increasedDefense) {
+                    aiPlayer.increasedDefense = false;
+                    aiPlayer.character.setDefense(player.character.getDefense() - 3);
+                }
+            }
+        }
     }
+
 
 
     //increments turn

@@ -1,13 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="200dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/game_finished_text"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
         android:text="@string/game_finished_placeholder"
         android:textColor="@color/colorSecondaryDark"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/game_finished_text"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/btn_padding"
+        android:id="@+id/restart_button"
+        android:text="@string/restart_btn"
+        android:layout_margin="@dimen/name_and_health_margin"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/restart_button"
+        android:layout_below="@id/game_finished_text"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/btn_padding"
+        android:id="@+id/main_menu_btn"
+        android:text="@string/main_menu_btn"
+        android:layout_margin="@dimen/name_and_health_margin"/>
+
+
 
 </RelativeLayout>

@@ -6,6 +6,8 @@ import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.example.danieltaylor.androidgame.GameElements.Character;
 import com.example.danieltaylor.androidgame.GameElements.GifImageView;
 import com.example.danieltaylor.androidgame.GameElements.Player;
+import com.example.danieltaylor.androidgame.MainMenuActivity;
 import com.example.danieltaylor.androidgame.R;
 
 import java.util.Random;
@@ -63,14 +66,15 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
         res = getResources();
 
         if (selectedCharacter == 0) {
-            Toast.makeText(getApplicationContext(), "assigning randomCharacter",
-                    Toast.LENGTH_LONG).show();
+            Log.e("GACT", "assigning random character to user");
             selectedCharacter = random.nextInt(4) + 1;
         }
 
         // create players
         userPlayer = createPlayer(selectedCharacter);
-        aiPlayer = createPlayer(random.nextInt(4 + 1));
+        int aiCharacter = random.nextInt(4) + 1;
+        Log.e("GACT", "assigned" + Integer.toString(aiCharacter)+"To ai");
+        aiPlayer = createPlayer(aiCharacter);
 
         music = MediaPlayer.create(getApplicationContext(), R.raw.almostdead);
         music.setLooping(true);
@@ -128,31 +132,28 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
     private Player createPlayer(int characterSelected) {
 
         Character c = new Character();
-
-        switch(characterSelected) {
-
-            case 1:
-                c.setAttack(res.getInteger(R.integer.character1_atk));
-                c.setDefense(res.getInteger(R.integer.character1_dfs));
-                c.setSpeed(res.getInteger(R.integer.character1_spd));
-                c.setGifResourceID(R.drawable.character1idle);
-                c.setName(res.getString(R.string.character1_name));
-
-            case 2:
-                c.setAttack(res.getInteger(R.integer.character2_atk));
-                c.setDefense(res.getInteger(R.integer.character2_dfs));
-                c.setSpeed(res.getInteger(R.integer.character2_spd));
-                c.setGifResourceID(R.drawable.character2idle);
-                c.setName(res.getString(R.string.character2_name));
-
-            case 3:
-                c.setAttack(res.getInteger(R.integer.character3_atk));
-                c.setDefense(res.getInteger(R.integer.character3_dfs));
-                c.setSpeed(res.getInteger(R.integer.character3_spd));
-                c.setGifResourceID(R.drawable.character3idle);
-                c.setName(res.getString(R.string.character3_name));
-
-            case 4:
+        if (characterSelected == 1) {
+            c.setAttack(res.getInteger(R.integer.character1_atk));
+            c.setDefense(res.getInteger(R.integer.character1_dfs));
+            c.setSpeed(res.getInteger(R.integer.character1_spd));
+            c.setGifResourceID(R.drawable.character1idle);
+            c.setName(res.getString(R.string.character1_name));
+        }
+        if (characterSelected == 2) {
+            c.setAttack(res.getInteger(R.integer.character2_atk));
+            c.setDefense(res.getInteger(R.integer.character2_dfs));
+            c.setSpeed(res.getInteger(R.integer.character2_spd));
+            c.setGifResourceID(R.drawable.character2idle);
+            c.setName(res.getString(R.string.character2_name));
+        }
+        if (characterSelected == 3) {
+            c.setAttack(res.getInteger(R.integer.character3_atk));
+            c.setDefense(res.getInteger(R.integer.character3_dfs));
+            c.setSpeed(res.getInteger(R.integer.character3_spd));
+            c.setGifResourceID(R.drawable.character3idle);
+            c.setName(res.getString(R.string.character3_name));
+        }
+        if (characterSelected == 4){
                 c.setAttack(res.getInteger(R.integer.character4_atk));
                 c.setDefense(res.getInteger(R.integer.character4_dfs));
                 c.setSpeed(res.getInteger(R.integer.character4_spd));
@@ -186,9 +187,67 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
 
     }
 
-    public void endGame(Player winner) {
+    public void endGame(final Player winner) {
         music.pause();
-        final Dialog dialog = new Dialog(getApplicationContext());
+        //TODO update leaderboard here
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final Dialog dialog = new Dialog(SinglePlayerGameActivity.this);
+                dialog.setContentView(R.layout.game_ended_dialog);
+                final TextView endGameText = dialog.findViewById(R.id.game_finished_text);
+                final Button restartBtn = dialog.findViewById(R.id.restart_button);
+                final Button mainMenuBtn = dialog.findViewById(R.id.main_menu_btn);
+                if (winner.getPlayerID().equals(userPlayer.getPlayerID())) {
+                    endGameText.setText(res.getString(R.string.game_finished_victory_text));
+                } else {
+                    endGameText.setText(res.getString(R.string.game_finished_loose_text));
+                }
+                restartBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        SinglePlayerGameActivity.this.restartGame();
+                    }
+                });
+
+                mainMenuBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        SinglePlayerGameActivity.this.mainMenu();
+                    }
+                });
+
+                dialog.show();
+            }
+        });
     }
+
+    protected void restartGame() {
+        //reset character health:
+        userPlayer.character.setHealth(userPlayer.character.getTotalHealth());
+
+        //update aiCharacter
+        aiPlayer = createPlayer(random.nextInt(4) + 1);
+        enemyCharacterGif.setGifImageResource(aiPlayer.character.getGifResourceID());
+        enemyCharacterName.setText(aiPlayer.character.getName());
+        enemyCharacterHealth.setText(res.getString(R.string.character_health, aiPlayer.character.getHealth()));
+
+        //create new thread
+        gameThread = new SinglePlayerGameThread(SinglePlayerGameActivity.this, res, userPlayer,
+                aiPlayer);
+
+        //start a new Game with the same character
+        music.start();
+        gameThread.onStart();
+    }
+
+    protected void mainMenu() {
+        //return the user to the main menu
+        Intent intent = new Intent(SinglePlayerGameActivity.this, MainMenuActivity.class);
+        startActivity(intent);
+    }
+
 
 }
