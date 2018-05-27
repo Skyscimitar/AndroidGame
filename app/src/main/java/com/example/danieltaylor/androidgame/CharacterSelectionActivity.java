@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.danieltaylor.androidgame.MultiPlayerGame.MultiPlayerGameActivity;
 import com.example.danieltaylor.androidgame.SingleGame.SinglePlayerGameActivity;
 
 public class CharacterSelectionActivity extends AppCompatActivity implements View.OnClickListener {
@@ -25,6 +26,7 @@ public class CharacterSelectionActivity extends AppCompatActivity implements Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_selection);
+        String mode = savedInstanceState.getBundle("mode").toString();
 
         character1 = findViewById(R.id.character1);
         character2 = findViewById(R.id.character2);
@@ -46,18 +48,33 @@ public class CharacterSelectionActivity extends AppCompatActivity implements Vie
         character2.setOnClickListener(this);
         character3.setOnClickListener(this);
         character4.setOnClickListener(this);
-        characterSelectionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (characterSelected != 0) {
-                    Intent intent = new Intent(CharacterSelectionActivity.this, SinglePlayerGameActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("character", characterSelected);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+        if (mode == "single") {
+            characterSelectionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (characterSelected != 0) {
+                        Intent intent = new Intent(CharacterSelectionActivity.this, SinglePlayerGameActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("character", characterSelected);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
                 }
-            }
-        });
+            });
+        } else if (mode == "multi") {
+            characterSelectionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (characterSelected != 0) {
+                        Intent intent = new Intent(CharacterSelectionActivity.this, MultiPlayerGameActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("character", characterSelected);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                }
+            });
+        }
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
