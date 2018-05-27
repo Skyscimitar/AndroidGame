@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidGame\\</string>
+    <string name="app_name">Battle Monsters</string>
     <string name="btn_signin">Sign In</string>
     <string name="btn_signup">Sign Up</string>
     <string name="login_email_hint">yourmailhere@email.com</string>
@@ -14,4 +14,14 @@
     <string name="btn_defend">Defend</string>
     <string name="btn_heal">Heal</string>
     <string name="current_health_text">Current Health: %value$i/%total$i</string>
+    <string name="character_attack">Attack: %1$d</string>
+    <string name="character_defense">Defense: %1$d</string>
+    <string name="character_speed">Speed: %1$d</string>
+    <string name="character_stat_placeholder">Stat: 100</string>
+    <string name="character_name">Choose: %1$s</string>
+    <string name="character_name_placeholder">Choose: monster</string>
+    <string name='character1_name'>Beasty</string>
+    <string name="character2_name">Little devil</string>
+    <string name="character3_name">Flopsy</string>
+    <string name="character4_name">Hopper</string>
 </resources>

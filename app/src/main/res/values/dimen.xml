@@ -4,7 +4,9 @@
     <dimen name="btn_padding">20dp</dimen>
     <dimen name="text_entry_margin">100dp</dimen>
     <dimen name="text_entry_padding">50dp</dimen>
-    <dimen name="character_selection_frame_size">150dp</dimen>
+    <dimen name="character_selection_frame_size">175dp</dimen>
     <dimen name="character_selection_frame_margin">30dp</dimen>
     <dimen name="chareter_size_battle">200dp</dimen>
+    <dimen name="character_selection_image_size">90dp</dimen>
+    <dimen name="character_selection_text_margin">4dp</dimen>
 </resources>

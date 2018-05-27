@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--TODO balance character stats based on gameplay -->
+    <integer name="character1_atk">10</integer>
+    <integer name="character1_dfs">3</integer>
+    <integer name="character1_spd">5</integer>
+
+    <integer name="character2_atk">7</integer>
+    <integer name="character2_dfs">5</integer>
+    <integer name="character2_spd">3</integer>
+
+    <integer name="character3_atk">8</integer>
+    <integer name="character3_dfs">4</integer>
+    <integer name="character3_spd">10</integer>
+
+    <integer name="character4_atk">7</integer>
+    <integer name="character4_dfs">4</integer>
+    <integer name="character4_spd">12</integer>
+
+</resources>
