@@ -13,4 +13,8 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="textColor">
+        <item name="android:textColor">@color/colorSecondaryDark</item>
+    </style>
+
 </resources>

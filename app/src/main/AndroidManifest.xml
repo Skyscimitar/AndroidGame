@@ -19,7 +19,7 @@
         <activity android:name=".MainMenuActivity" />
         <activity
             android:name=".CharacterSelectionActivity"
-            android:parentActivityName=".MainMenuActivity" />
+            android:parentActivityName=".MainMenuActivity"/>
         <activity android:name=".LeaderboardActivity" />
         <activity
             android:name=".SingleGame.SinglePlayerGameActivity"
