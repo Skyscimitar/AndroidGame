@@ -13,4 +13,5 @@
     <string name="btn_attack">Attack</string>
     <string name="btn_defend">Defend</string>
     <string name="btn_heal">Heal</string>
+    <string name="current_health_text">Current Health: %value$i/%total$i</string>
 </resources>

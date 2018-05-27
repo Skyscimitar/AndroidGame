@@ -1,10 +1,13 @@
 package com.example.danieltaylor.androidgame.SingleGame;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.view.SurfaceView;
 import android.widget.ArrayAdapter;
 
 import com.example.danieltaylor.androidgame.GameElements.Player;
 import com.example.danieltaylor.androidgame.GameElements.Character;
+import com.example.danieltaylor.androidgame.R;
 
 import org.json.JSONObject;
 
@@ -27,12 +30,16 @@ public class SinglePlayerGameThread implements Runnable {
     private String aiPlayerAction;
     private ArrayList<Player> playerArrayList = new ArrayList<>();
     public SinglePlayerGameActivity activity;
+    SurfaceView enemyHealth;
+    SurfaceView playerHealth;
+    private Resources res;
 
-    public SinglePlayerGameThread(SinglePlayerGameActivity activity){
+    public SinglePlayerGameThread(SinglePlayerGameActivity activity, Resources res){
 
         super();
 
         this.activity = activity;
+        this.res = res;
 
         actions.add("ATTACK");
         actions.add("DEFEND");
@@ -43,6 +50,8 @@ public class SinglePlayerGameThread implements Runnable {
 
         aiPlayer = new Player(playerCharacter);
         userPlayer = new Player(aiCharacter);
+
+        //TODO set the image views to display the correct character sprites
 
 
         playerArrayList.add(aiPlayer);
@@ -90,7 +99,21 @@ public class SinglePlayerGameThread implements Runnable {
     }
 
     //updates the game view
-    private void draw(){}
+    private void draw() {
+        //update the ui based on the current game state
+        //update user player health
+        activity.playerHealthText.setText(res.getString(R.string.current_health_text,
+                userPlayer.character.getHealth(), userPlayer.character.getTotalHealth()));
+
+        //TODO update surface view
+
+
+        //update ai player health
+        activity.enemyHealthText.setText(res.getString(R.string.current_health_text,
+                aiPlayer.character.getHealth(), aiPlayer.character.getTotalHealth()));
+
+        //TODO update surface view
+    }
 
     //registers player controls
     private void control(){}
@@ -119,6 +142,22 @@ public class SinglePlayerGameThread implements Runnable {
         game.startGame();
         gameThread = new Thread(this);
         gameThread.start();
+    }
+
+    public void onReceivePlayerControl(String action) {
+        switch (action) {
+            case "ATTACK":
+                userPlayerActed = true;
+                userPlayerAction = action;
+            case "DEFEND":
+                userPlayerActed = true;
+                userPlayerAction = action;
+            case "HEAL":
+                userPlayerActed = true;
+                userPlayerAction = action;
+        }
+
+        //TODO update ui based on the players choice
     }
 
 

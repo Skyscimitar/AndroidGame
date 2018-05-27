@@ -8,6 +8,7 @@ public class Character {
     private int defense;
     private int speed;
     private int health;
+    private int totalHealth;
     private boolean isDead = false;
 
     private Bitmap frontappearance;
@@ -21,6 +22,7 @@ public class Character {
         this.defense = defense;
         this.speed = speed;
         this.health = 100;
+        this.totalHealth = 100;
         this.frontappearance = frontappearance;
         this.backappearance = backappearance;
         this.characterSelectionappearance = characterSelectionappearance;
@@ -80,6 +82,10 @@ public class Character {
 
     public void setCharacterSelectionappearance(Bitmap characterSelectionappearance) {
         this.characterSelectionappearance = characterSelectionappearance;
+    }
+
+    public int getTotalHealth() {
+        return this.totalHealth;
     }
 
     public boolean isDead(){

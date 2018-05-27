@@ -62,10 +62,10 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
                         if (match.getData() == null) {
                             // First turn, initialize game data
                             // TODO implement this -> set characters for each player
-                            initializeGameData(match);
+                            //initializeGameData(match);
                         }
                         // Show turn UI
-                        showTurnUI(match);
+                        //showTurnUI(match);
                     } else {
                         // Error encountered
                         int status = CommonStatusCodes.DEVELOPER_ERROR;
@@ -74,7 +74,7 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
                             ApiException apiException = (ApiException) exception;
                             status = apiException.getStatusCode();
                         }
-                        handleError(status, exception);
+                        //handleError(status, exception);
                     }
                 }
             });
@@ -82,24 +82,24 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
     }
 
     private void playTurn(TurnBasedMatch match) {
-        String nextParticipantId = getNextParticipantId(mMyPlayerId, match);
+        //String nextParticipantId = getNextParticipantId(mMyPlayerId, match);
 
         // This calls a game specific method to get the bytes that represent the game state
         // including the current player's turn.
-        byte[] gameData = serializeGameData();
+        //byte[] gameData = serializeGameData();
 
-        Games.getTurnBasedMultiplayerClient(this, GoogleSignIn.getLastSignedInAccount(this))
-                .takeTurn(match.getMatchId(), gameData, nextParticipantId)
-                .addOnCompleteListener(new OnCompleteListener<TurnBasedMatch>() {
-                    @Override
-                    public void onComplete(@NonNull Task<TurnBasedMatch> task) {
-                        if (task.isSuccessful()) {
-                            TurnBasedMatch match = task.getResult();
-                        } else {
-                            // Handle exceptions.
-                        }
-                    }
-                });
+        //Games.getTurnBasedMultiplayerClient(this, GoogleSignIn.getLastSignedInAccount(this))
+        //        .takeTurn(match.getMatchId(), gameData, nextParticipantId)
+         //       .addOnCompleteListener(new OnCompleteListener<TurnBasedMatch>() {
+        //            @Override
+         //           public void onComplete(@NonNull Task<TurnBasedMatch> task) {
+          //              if (task.isSuccessful()) {
+           //                 TurnBasedMatch match = task.getResult();
+            //            } else {
+             //               // Handle exceptions.
+              //          }
+               //     }
+                //});
     }
 
     public void onStartMatchClicked(View view) {
