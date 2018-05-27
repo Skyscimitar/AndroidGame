@@ -21,6 +21,52 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/player_character_gif"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:id="@+id/player_character_name"
+        android:text="@string/character1_name"
+        android:padding="@dimen/name_and_health_padding"
+        android:layout_marginEnd="@dimen/name_and_health_margin"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/player_character_name"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorSecondaryDark"
+        android:text="@string/character_health_placeholder"
+        android:id="@+id/player_character_health"
+        android:padding="@dimen/name_and_health_padding"
+        android:layout_marginEnd="@dimen/name_and_health_margin"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_alignTop="@id/enemy_character_gif"
+        android:id="@+id/enemy_character_name"
+        android:text="@string/character2_name"
+        android:padding="@dimen/name_and_health_padding"
+        android:layout_marginStart="@dimen/name_and_health_margin"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/colorSecondaryDark"
+        android:layout_below="@id/enemy_character_name"
+        android:text="@string/character_health_placeholder"
+        android:id="@+id/enemy_character_health"
+        android:padding="@dimen/name_and_health_padding"
+        android:layout_marginStart="@dimen/name_and_health_margin"/>
+
 
     <RelativeLayout
         android:id="@+id/action_button_bar"
@@ -37,6 +83,8 @@
             android:layout_alignParentStart="true"
             android:layout_marginBottom="18dp"
             android:layout_marginStart="35dp"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/btn_padding"
             android:text="@string/btn_attack" />
 
         <Button
@@ -45,6 +93,8 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/btn_attack"
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/btn_padding"
             android:text="@string/btn_defend" />
 
         <Button
@@ -53,7 +103,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/btn_attack"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="42dp"
+            android:padding="@dimen/btn_padding"
             android:text="@string/btn_heal" />
 
     </RelativeLayout>

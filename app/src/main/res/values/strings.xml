@@ -24,4 +24,6 @@
     <string name="character2_name">Little devil</string>
     <string name="character3_name">Flopsy</string>
     <string name="character4_name">Hopper</string>
+    <string name="character_health">Health: %1$d/100</string>
+    <string name="character_health_placeholder">Health: 100/100</string>
 </resources>

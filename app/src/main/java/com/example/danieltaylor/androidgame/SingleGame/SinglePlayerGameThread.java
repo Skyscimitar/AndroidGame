@@ -92,7 +92,7 @@ public class SinglePlayerGameThread implements Runnable {
 
         //if it's the ai turn, take a random action
         if(game.isPlayerTurn(aiPlayer)) {
-            int ai = new Random().nextInt(2);
+            int ai = new Random().nextInt(3) + 1;
             aiPlayerAction = actions.get(ai);
             aiPlayerActed = true;
         }

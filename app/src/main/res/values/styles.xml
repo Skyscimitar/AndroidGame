@@ -10,8 +10,9 @@
     </style>
 
     <!-- Remove title from particular views. -->
-    <style name="generalnotitle">
+    <style name="generalnotitle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
+        <item name="android:buttonStyle">@style/button</item>
     </style>
 
     <style name="textColor">

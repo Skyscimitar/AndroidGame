@@ -146,9 +146,7 @@ public class CharacterSelectionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (characterSelected != 0) {
                     Intent intent = new Intent(CharacterSelectionActivity.this, SinglePlayerGameActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("character", characterSelected);
-                    intent.putExtras(bundle);
+                    intent.putExtra("character", characterSelected);
                     startActivity(intent);
                 }
             }

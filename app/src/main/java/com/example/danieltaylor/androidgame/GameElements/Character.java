@@ -12,11 +12,13 @@ public class Character {
     private int speed;
     private int health;
     private int totalHealth;
+    private String name;
     private boolean isDead = false;
 
     private Bitmap frontappearance;
     private Bitmap backappearance;
     private Bitmap characterSelectionappearance;
+    private int gifResourceID;
     private int number;
 
     public Character() {
@@ -105,5 +107,21 @@ public class Character {
         if (character.getHealth() <= 0) {
             this.isDead = true;
         }
+    }
+
+    public int getGifResourceID() {
+        return gifResourceID;
+    }
+
+    public void setGifResourceID(int id) {
+        this.gifResourceID = id;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
