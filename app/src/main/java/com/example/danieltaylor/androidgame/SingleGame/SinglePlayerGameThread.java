@@ -183,8 +183,11 @@ public class SinglePlayerGameThread implements Runnable {
     private void endGame(Player winner){
         Log.e("GT", "Game end fct called");
         try {
+            //tell the thread it can allow the handler to do its work
             Looper.prepare();
+            //this is the handler ->
             activity.endGame(winner);
+            //end the thread safely once the activity is done with its work
             gameThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -57,6 +57,7 @@ public class SinglePlayerGame {
     }
 
     private void takeAction(Player player, String action) {
+        //TODO optimize the code -> the same code should be used for the aiPlayer and the userPlayer updates
         switch (action){
             case "ATTACK":
                 if (player.getPlayerID().equals(userPlayer.getPlayerID())) {
