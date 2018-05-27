@@ -67,18 +67,29 @@ public class LoginActivity extends AppCompatActivity {
         passwordTextInput = findViewById(R.id.user_password);
 
 
-        //TODO control input to ensure it isn't void
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signInUser(emailTextInput.getText().toString(), passwordTextInput.getText().toString());
+                if (emailTextInput.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Email empty",Toast.LENGTH_LONG).show();
+                } else if (passwordTextInput.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Password empty", Toast.LENGTH_LONG).show();
+                } else {
+                    signInUser(emailTextInput.getText().toString(), passwordTextInput.getText().toString());
+                }
             }
         });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signUpUser(emailTextInput.getText().toString(), passwordTextInput.getText().toString());
+                if (emailTextInput.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Email empty",Toast.LENGTH_LONG).show();
+                } else if (passwordTextInput.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Password empty", Toast.LENGTH_LONG).show();
+                } else {
+                    signUpUser(emailTextInput.getText().toString(), passwordTextInput.getText().toString());
+                }
             }
         });
 
