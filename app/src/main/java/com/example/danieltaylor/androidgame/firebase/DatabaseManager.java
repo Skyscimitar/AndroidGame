@@ -75,9 +75,9 @@ public class DatabaseManager {
 
     private User updateSingleScore(User u, Boolean victory){
         if (victory) {
-            u.setSinglePlayerScore(u.getMultiPlayerScore() + 20);
+            u.setSinglePlayerScore(u.getSinglePlayerScore() + 20);
         } else {
-            u.setSinglePlayerScore(max(0, u.getMultiPlayerScore() - 10));
+            u.setSinglePlayerScore(max(0, u.getSinglePlayerScore() - 10));
         }
         return u;
     }

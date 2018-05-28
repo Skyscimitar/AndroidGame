@@ -18,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MultiLeaderboardFragment extends Fragment {
 
@@ -56,6 +58,23 @@ public class MultiLeaderboardFragment extends Fragment {
             userList.add(ds.getValue(User.class));
         }
         adapter = new MultiLeaderBoardArrayAdapter(getContext(), userList);
+        userList = (ArrayList) reverse(userList);
         userListView.setAdapter(adapter);
+    }
+
+    public static <T> List<T> reverse(List<T> arrayList) {
+        return reverse(arrayList,0,arrayList.size()-1);
+    }
+    public static <T> List<T> reverse(List<T> arrayList,int startIndex,int lastIndex) {
+
+        if(startIndex<lastIndex) {
+            T t=arrayList.get(lastIndex);
+            arrayList.set(lastIndex,arrayList.get(startIndex));
+            arrayList.set(startIndex,t);
+            startIndex++;
+            lastIndex--;
+            reverse(arrayList,startIndex,lastIndex);
+        }
+        return arrayList;
     }
 }
