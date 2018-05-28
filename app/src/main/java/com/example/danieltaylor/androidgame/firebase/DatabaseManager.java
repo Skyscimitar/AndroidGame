@@ -92,13 +92,24 @@ public class DatabaseManager {
     }
 
 
-    public void preparpeUser(String id) {
+    /**
+     * register a new user if it doesn't exist or do nothing
+     * @param mUser
+     */
+    public void registerUser(final FirebaseUser mUser) {
         ref = mDatabase.getReference("User");
-        Query query = ref.child(id);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                user = dataSnapshot.getValue(User.class);
+                if (!dataSnapshot.hasChild(mUser.getUid())) {
+                    User u = new User();
+                    u.setMultiPlayerScore(0);
+                    u.setSinglePlayerScore(0);
+                    u.setEmail(mUser.getEmail());
+                    u.setName(mUser.getDisplayName());
+                    u.setId(mUser.getUid());
+                    ref.child(u.getId()).setValue(u);
+                }
             }
 
             @Override
@@ -108,25 +119,4 @@ public class DatabaseManager {
         });
     }
 
-
-    /**
-     * update the user in the db when the user signs in
-     * @param u
-     */
-    public void updateUserOnSignIn(User u) {
-        ref = mDatabase.getReference("User");
-        ref.child(u.getId()).setValue(u);
-    }
-
-    public ArrayList<User> getSingleLeaderBoard() {
-        return singleLeaderBoard;
-    }
-
-    public ArrayList<User> getMultiLeaderBoard() {
-        return multiLeaderBoard;
-    }
-
-    public User getUser() {
-        return user;
-    }
 }

@@ -41,7 +41,6 @@ public class MainMenuActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
         dm = new DatabaseManager(mDatabase);
         mUser = mAuth.getCurrentUser();
-        dm.preparpeUser(mUser.getUid());
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
@@ -80,7 +79,7 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        addUserToDb();
+        dm.registerUser(mUser);
     }
 
     //TODO leaderboard activity
@@ -102,16 +101,5 @@ public class MainMenuActivity extends AppCompatActivity {
     /**
      * add the new user to the db if it doesnt' exist
      */
-    private void addUserToDb(){
-        if (dm.getUser() == null) {
-            User user = new User();
-            user.setId(mUser.getUid());
-            user.setEmail(mUser.getEmail());
-            user.setSinglePlayerScore(0);
-            user.setMultiPlayerScore(0);
-            user.setName(mUser.getDisplayName());
-            dm.updateUserOnSignIn(user);
-        }
-    }
 
 }
