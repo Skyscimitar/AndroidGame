@@ -20,7 +20,6 @@
         <activity
             android:name=".CharacterSelectionActivity"
             android:parentActivityName=".MainMenuActivity"/>
-        <activity android:name=".LeaderboardActivity" />
         <activity
             android:name=".single_game.SinglePlayerGameActivity"
             android:theme="@style/generalnotitle">
