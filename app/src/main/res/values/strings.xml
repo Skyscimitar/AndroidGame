@@ -33,5 +33,6 @@
     <string name="main_menu_btn">Back to menu</string>
     <string name="single_leaderboard_nav">1 Player</string>
     <string name="multi_leaderboard_nav">2 Player</string>
+    <string name="leaderboard_title">Leaderboard</string>
 
 </resources>
