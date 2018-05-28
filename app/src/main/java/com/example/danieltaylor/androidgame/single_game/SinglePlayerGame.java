@@ -1,13 +1,10 @@
-package com.example.danieltaylor.androidgame.SingleGame;
+package com.example.danieltaylor.androidgame.single_game;
 
-import com.example.danieltaylor.androidgame.GameElements.Character;
-import com.example.danieltaylor.androidgame.GameElements.Player;
-
-import org.json.JSONObject;
+import com.example.danieltaylor.androidgame.game_elements.Character;
+import com.example.danieltaylor.androidgame.game_elements.Player;
 
 import java.util.ArrayList;
 
-import static android.icu.text.UnicodeSet.CASE;
 import static java.lang.Math.max;
 
 public class SinglePlayerGame {

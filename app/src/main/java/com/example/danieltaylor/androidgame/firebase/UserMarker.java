@@ -1,4 +1,4 @@
-package com.example.danieltaylor.androidgame.Firebase;
+package com.example.danieltaylor.androidgame.firebase;
 
 public class UserMarker {
     private String id;

@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SingleGame.SinglePlayerGameActivity"
+    tools:context=".single_game.SinglePlayerGameActivity"
     android:background="@android:color/white">
 
-    <com.example.danieltaylor.androidgame.GameElements.GifImageView
+    <com.example.danieltaylor.androidgame.game_elements.GifImageView
         android:layout_width="@dimen/chareter_size_battle"
         android:layout_height="@dimen/chareter_size_battle"
         android:id="@+id/player_character_gif"
         android:layout_above="@id/action_button_bar"
         android:layout_alignParentStart="true"/>
 
-    <com.example.danieltaylor.androidgame.GameElements.GifImageView
+    <com.example.danieltaylor.androidgame.game_elements.GifImageView
         android:layout_width="@dimen/chareter_size_battle"
         android:layout_height="@dimen/chareter_size_battle"
         android:id="@+id/enemy_character_gif"

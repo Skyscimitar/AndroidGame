@@ -1,4 +1,4 @@
-package com.example.danieltaylor.androidgame.GameElements;
+package com.example.danieltaylor.androidgame.game_elements;
 
 import android.content.Context;
 import android.graphics.Canvas;

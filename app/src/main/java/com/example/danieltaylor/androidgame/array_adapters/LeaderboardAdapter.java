@@ -1,4 +1,4 @@
-package com.example.danieltaylor.androidgame.ArrayAdapters;
+package com.example.danieltaylor.androidgame.array_adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.danieltaylor.androidgame.Firebase.UserMarker;
+import com.example.danieltaylor.androidgame.firebase.UserMarker;
 import com.example.danieltaylor.androidgame.R;
 
 import java.util.ArrayList;

@@ -1,19 +1,12 @@
-package com.example.danieltaylor.androidgame.SingleGame;
+package com.example.danieltaylor.androidgame.single_game;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.os.Looper;
-import android.os.Message;
-import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.example.danieltaylor.androidgame.GameElements.Player;
-import com.example.danieltaylor.androidgame.GameElements.Character;
-import com.example.danieltaylor.androidgame.R;
+import com.example.danieltaylor.androidgame.game_elements.Player;
 
 import org.json.JSONObject;
 

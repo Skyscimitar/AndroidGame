@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.example.danieltaylor.androidgame.Firebase.DbManager;
-import com.example.danieltaylor.androidgame.Firebase.UserMarker;
+import com.example.danieltaylor.androidgame.firebase.DbManager;
+import com.example.danieltaylor.androidgame.firebase.UserMarker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 

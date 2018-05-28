@@ -1,6 +1,5 @@
-package com.example.danieltaylor.androidgame.SingleGame;
+package com.example.danieltaylor.androidgame.single_game;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
@@ -11,12 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.danieltaylor.androidgame.CharacterSelectionActivity;
-import com.example.danieltaylor.androidgame.GameElements.Character;
-import com.example.danieltaylor.androidgame.GameElements.GifImageView;
-import com.example.danieltaylor.androidgame.GameElements.Player;
+import com.example.danieltaylor.androidgame.game_elements.Character;
+import com.example.danieltaylor.androidgame.game_elements.GifImageView;
+import com.example.danieltaylor.androidgame.game_elements.Player;
 import com.example.danieltaylor.androidgame.MainMenuActivity;
 import com.example.danieltaylor.androidgame.R;
 

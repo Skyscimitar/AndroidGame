@@ -1,4 +1,4 @@
-package com.example.danieltaylor.androidgame.MultiPlayerGame;
+package com.example.danieltaylor.androidgame.multi_player_game;
 
 import android.util.Log;
 

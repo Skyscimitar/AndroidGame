@@ -1,9 +1,6 @@
-package com.example.danieltaylor.androidgame.GameElements;
+package com.example.danieltaylor.androidgame.game_elements;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import com.example.danieltaylor.androidgame.R;
 
 public class Character {
 

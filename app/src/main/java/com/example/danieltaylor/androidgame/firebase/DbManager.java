@@ -1,4 +1,4 @@
-package com.example.danieltaylor.androidgame.Firebase;
+package com.example.danieltaylor.androidgame.firebase;
 
 import com.example.danieltaylor.androidgame.LeaderboardActivity;
 import com.google.firebase.database.DataSnapshot;

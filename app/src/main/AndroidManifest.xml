@@ -22,10 +22,10 @@
             android:parentActivityName=".MainMenuActivity"/>
         <activity android:name=".LeaderboardActivity" />
         <activity
-            android:name=".SingleGame.SinglePlayerGameActivity"
+            android:name=".single_game.SinglePlayerGameActivity"
             android:theme="@style/generalnotitle">
         </activity>
-        <activity android:name=".MultiPlayerGame.MultiPlayerGameActivity"></activity>
+        <activity android:name=".multi_player_game.MultiPlayerGameActivity"></activity>
     </application>
 
 </manifest>
