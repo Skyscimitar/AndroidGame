@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="200dp">
 
+    <!--TODO make the dialog pretty -->
+    <!-- resize the buttons, add a border?, change the background? -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
