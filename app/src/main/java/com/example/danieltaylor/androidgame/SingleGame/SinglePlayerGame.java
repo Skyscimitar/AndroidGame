@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static android.icu.text.UnicodeSet.CASE;
+import static java.lang.Math.max;
 
 public class SinglePlayerGame {
 
@@ -56,6 +57,11 @@ public class SinglePlayerGame {
         incrementTurn();
     }
 
+    /**
+     * Handles a player's turn
+     * @param player
+     * @param action
+     */
     private void takeAction(Player player, String action) {
         //TODO optimize the code -> the same code should be used for the aiPlayer and the userPlayer updates
         if (action.equals("ATTACK")) {
@@ -63,14 +69,14 @@ public class SinglePlayerGame {
                 aiPlayer = takeDamage(aiPlayer, player);
                 if (userPlayer.increasedDefense) {
                     userPlayer.increasedDefense = false;
-                    userPlayer.character.setDefense(player.character.getDefense() - 3);
+                    userPlayer.character.setDefense(player.character.getDefense() - 7);
                 }
 
             } else {
                 userPlayer = takeDamage(userPlayer, player);
                 if (aiPlayer.increasedDefense) {
                     aiPlayer.increasedDefense = false;
-                    aiPlayer.character.setDefense(player.character.getDefense() - 3);
+                    aiPlayer.character.setDefense(player.character.getDefense() - 7);
                 }
             }
         }
@@ -78,12 +84,12 @@ public class SinglePlayerGame {
             if (player.getPlayerID().equals(userPlayer.getPlayerID())) {
                 if (!userPlayer.increasedDefense) {
                     userPlayer.increasedDefense = true;
-                    userPlayer.character.setDefense(player.character.getDefense() + 3);
+                    userPlayer.character.setDefense(player.character.getDefense() + 7);
                 }
             } else {
                 if (!aiPlayer.increasedDefense) {
                     aiPlayer.increasedDefense = true;
-                    aiPlayer.character.setDefense(player.character.getDefense() + 3);
+                    aiPlayer.character.setDefense(player.character.getDefense() + 7);
                 }
             }
         }
@@ -92,14 +98,14 @@ public class SinglePlayerGame {
                 userPlayer = healCharacter(userPlayer);
                 if (userPlayer.increasedDefense) {
                     userPlayer.increasedDefense = false;
-                    userPlayer.character.setDefense(player.character.getDefense() - 3);
+                    userPlayer.character.setDefense(player.character.getDefense() - 7);
                 }
 
             } else {
                 aiPlayer = healCharacter(aiPlayer);
                 if (aiPlayer.increasedDefense) {
                     aiPlayer.increasedDefense = false;
-                    aiPlayer.character.setDefense(player.character.getDefense() - 3);
+                    aiPlayer.character.setDefense(player.character.getDefense() - 7);
                 }
             }
         }
@@ -131,6 +137,10 @@ public class SinglePlayerGame {
         return isGameOver;
     }
 
+
+    /**
+     * Determines if the game is over or not
+     */
     private void checkGameStatus(){
         //used to track if someone lost this turn
         if (aiPlayer.character.getHealth() <= 0) {
@@ -155,16 +165,29 @@ public class SinglePlayerGame {
         return updatedPlayer;
     }
 
+    /**
+     * Calculates the damage the player's character has taken
+     * @param victim
+     * @param attacker
+     * @return returns the updated player object
+     */
     private Player takeDamage(Player victim, Player attacker) {
         int damage = attacker.character.getAttack() - victim.character.getDefense();
-        //in certain conditions if a player has increased his defense this can happen
+        //in certain conditions if a player has increased his defense this could happen
         if (damage <= 0) {
             damage = 1;
         }
-        victim.character.setHealth(victim.character.getHealth() - damage);
+        //prevent health from going below 0
+        int newHealth = max(victim.character.getHealth() - damage, 0);
+        victim.character.setHealth(newHealth);
         return victim;
     }
 
+    /**
+     * Heals a player's character
+     * @param player
+     * @return returns the updated player
+     */
     private Player healCharacter(Player player) {
         int newHealth = player.character.getHealth() + 10;
         if (newHealth >= player.character.getTotalHealth()) {

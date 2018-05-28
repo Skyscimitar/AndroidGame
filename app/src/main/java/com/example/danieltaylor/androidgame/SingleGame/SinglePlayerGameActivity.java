@@ -64,8 +64,6 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         int selectedCharacter = intent.getIntExtra("character", 0);
-
-        //TODO change the GameThread to a view ?not sure if necessary at the moment?
         setContentView(R.layout.activity_single_player_game);
 
 
@@ -155,6 +153,11 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
         gameThread.onPause();
     }
 
+    /**
+     * Creates a new player object with the character selected
+     * @param characterSelected
+     * @return
+     */
     private Player createPlayer(int characterSelected) {
 
         Character c = new Character();
@@ -235,7 +238,7 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
         //hide the dialog
         dialogLayout.setVisibility(View.GONE);
         startActivity(intent);
-        
+
     }
 
     protected void mainMenu() {
