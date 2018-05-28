@@ -30,17 +30,23 @@ public class DatabaseManager {
      * @param victory
      * @param user
      */
-    public void incrementSingleScore(boolean victory, FirebaseUser user) {
+    public void incrementSingleScore(final boolean victory, FirebaseUser user) {
         ref = mDatabase.getReference("User");
-        preparpeUser(user.getUid());
-        User u = getUser();
-        if (victory) {
-            u.setSinglePlayerScore(u.getSinglePlayerScore() + 20);
-        } else {
-            u.setSinglePlayerScore(max(0, u.getSinglePlayerScore() - 10));
-        }
-        ref.child(user.getUid()).setValue(u);
-        preparpeUser(user.getUid());
+        Query query = ref.child(user.getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User u = dataSnapshot.getValue(User.class);
+                u = updateSingleScore(u, victory);
+                ref.child(u.getId()).setValue(u);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     /**
@@ -49,15 +55,40 @@ public class DatabaseManager {
      * @param victory
      * @param user
      */
-    public void incrementMultiScore(boolean victory, FirebaseUser user) {
+    public void incrementMultiScore(final boolean victory, FirebaseUser user) {
         ref = mDatabase.getReference("User");
-        preparpeUser(user.getUid());
-        User u = getUser();
+        Query query = ref.child(user.getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User u = dataSnapshot.getValue(User.class);
+                u = updateMultiScore(u, victory);
+                ref.child(u.getId()).setValue(u);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private User updateSingleScore(User u, Boolean victory){
+        if (victory) {
+            u.setSinglePlayerScore(u.getMultiPlayerScore() + 20);
+        } else {
+            u.setSinglePlayerScore(max(0, u.getMultiPlayerScore() - 10));
+        }
+        return u;
+    }
+
+    private User updateMultiScore(User u, Boolean victory){
         if (victory) {
             u.setMultiPlayerScore(u.getMultiPlayerScore() + 20);
         } else {
             u.setMultiPlayerScore(max(0, u.getMultiPlayerScore() - 10));
         }
+        return u;
     }
 
 

@@ -12,17 +12,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.danieltaylor.androidgame.CharacterSelectionActivity;
+import com.example.danieltaylor.androidgame.firebase.DatabaseManager;
 import com.example.danieltaylor.androidgame.game_elements.Character;
 import com.example.danieltaylor.androidgame.game_elements.GifImageView;
 import com.example.danieltaylor.androidgame.game_elements.Player;
 import com.example.danieltaylor.androidgame.MainMenuActivity;
 import com.example.danieltaylor.androidgame.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Random;
 
 public class SinglePlayerGameActivity extends AppCompatActivity {
 
     private SinglePlayerGameThread gameThread;
+    private UpdateLeaderBoardThread ult;
+
+    FirebaseAuth mAuth;
+    FirebaseDatabase mDatabase;
+    DatabaseManager dm;
+    FirebaseUser mUser;
 
     GifImageView playerCharacterGif;
     GifImageView enemyCharacterGif;
@@ -64,8 +74,12 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
         int selectedCharacter = intent.getIntExtra("character", 0);
         setContentView(R.layout.activity_single_player_game);
 
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
+        dm = new DatabaseManager(mDatabase);
+        mUser = mAuth.getCurrentUser();
 
-
+        ult = new UpdateLeaderBoardThread(mUser, dm);
         res = getResources();
 
         if (selectedCharacter == 0) {
@@ -216,7 +230,9 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
 
     public void endGame(final Player winner) {
         music.pause();
-        //TODO update leaderboard here
+        Boolean victory = userPlayer.getPlayerID().equals(winner.getPlayerID());
+        ult.setWinner(victory);
+        ult.run();
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
