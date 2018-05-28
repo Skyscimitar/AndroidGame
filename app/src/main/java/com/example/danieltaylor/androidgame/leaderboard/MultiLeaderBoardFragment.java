@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.danieltaylor.androidgame.R;
-import com.example.danieltaylor.androidgame.firebase.DatabaseManager;
 import com.example.danieltaylor.androidgame.firebase.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,12 +21,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SingleLeaderboardFrament extends Fragment{
+public class MultiLeaderBoardFragment extends Fragment {
+
+
 
     FirebaseDatabase mDatabase;
-    ArrayList<User> userList = new ArrayList<>();
-    SingleLeaderBoardArrayAdapter adapter;
-    ListView userListView;
+    private ListView userListView;
+    private ArrayList<User> userList = new ArrayList<>();
+    private MultiLeaderBoardArrayAdapter adapter;
 
     @Nullable
     @Override
@@ -46,22 +47,19 @@ public class SingleLeaderboardFrament extends Fragment{
             }
         });
 
-        View rootView =  inflater.inflate(R.layout.single_leaderboard_fragment, null);
-        userListView = rootView.findViewById(R.id.single_leaderboard_list);
+        View rootView =  inflater.inflate(R.layout.multi_leaderboard_fragment, null);
+        userListView = rootView.findViewById(R.id.multi_leaderboard_list);
         return rootView;
     }
 
-
-    private void updateUsers(DataSnapshot dataSnapshot) {
+    private void updateUsers(DataSnapshot dataSnapshot){
         userList.clear();
         for (DataSnapshot ds:dataSnapshot.getChildren()) {
             userList.add(ds.getValue(User.class));
         }
-        adapter = new SingleLeaderBoardArrayAdapter(getContext(), userList);
-        //because firebase doesn't provide decreasing order, we have to reverse the list
+        adapter = new MultiLeaderBoardArrayAdapter(getContext(), userList);
         userList = (ArrayList) reverse(userList);
         userListView.setAdapter(adapter);
-
     }
 
     public static <T> List<T> reverse(List<T> arrayList) {
@@ -79,5 +77,4 @@ public class SingleLeaderboardFrament extends Fragment{
         }
         return arrayList;
     }
-
 }

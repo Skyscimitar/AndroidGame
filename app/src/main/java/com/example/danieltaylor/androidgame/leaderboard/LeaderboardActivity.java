@@ -21,7 +21,7 @@ public class LeaderboardActivity extends AppCompatActivity implements BottomNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
 
-        SingleLeaderboardFrament fragment = new SingleLeaderboardFrament();
+        SingleLeaderBoardFragment fragment = new SingleLeaderBoardFragment();
         loadFragment(fragment);
 
         ActionBar actionBar = getSupportActionBar();
@@ -41,10 +41,10 @@ public class LeaderboardActivity extends AppCompatActivity implements BottomNavi
         Fragment fragment = null;
         switch(item.getItemId()) {
             case R.id.single_leaderboard_nav_btn:
-                fragment = new SingleLeaderboardFrament();
+                fragment = new SingleLeaderBoardFragment();
                 break;
             case R.id.multi_leaderboard_nav_btn:
-                fragment = new MultiLeaderboardFragment();
+                fragment = new MultiLeaderBoardFragment();
                 break;
         }
         return loadFragment(fragment);
