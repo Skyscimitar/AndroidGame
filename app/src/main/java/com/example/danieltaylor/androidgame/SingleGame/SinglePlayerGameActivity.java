@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.danieltaylor.androidgame.CharacterSelectionActivity;
 import com.example.danieltaylor.androidgame.GameElements.Character;
 import com.example.danieltaylor.androidgame.GameElements.GifImageView;
 import com.example.danieltaylor.androidgame.GameElements.Player;
@@ -229,24 +230,12 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
     }
 
     protected void restartGame() {
-        //reset character health:
-        userPlayer.character.setHealth(userPlayer.character.getTotalHealth());
-
-        //update aiCharacter
-        aiPlayer = createPlayer(random.nextInt(4) + 1);
-        enemyCharacterGif.setGifImageResource(aiPlayer.character.getGifResourceID());
-        enemyCharacterName.setText(aiPlayer.character.getName());
-        enemyCharacterHealth.setText(res.getString(R.string.character_health, aiPlayer.character.getHealth()));
-
-        //create new thread
-        gameThread = new SinglePlayerGameThread(SinglePlayerGameActivity.this, res, userPlayer,
-                aiPlayer);
-
-        //start a new Game with the same character
-        music.start();
-        //hide the dialogWindow
+        //starting a new game, we want the user to be able to change character if they want to
+        Intent intent = new Intent(getApplicationContext(), CharacterSelectionActivity.class);
+        //hide the dialog
         dialogLayout.setVisibility(View.GONE);
-        gameThread.onStart();
+        startActivity(intent);
+        
     }
 
     protected void mainMenu() {
