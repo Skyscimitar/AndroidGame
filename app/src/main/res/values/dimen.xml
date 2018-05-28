@@ -18,5 +18,8 @@
     <dimen name="leaderboard_text_size">20sp</dimen>
     <dimen name="leaderboard_text_margin">20dp</dimen>
     <dimen name="character_selection_margin">15dp</dimen>
+    <dimen name="game_ended_text_size">30sp</dimen>
+    <dimen name="game_ended_button_paddng">5dp</dimen>
+    <dimen name="game_ended_dialog_width">300dp</dimen>
 
 </resources>

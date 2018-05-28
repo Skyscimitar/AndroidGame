@@ -29,7 +29,7 @@
     <string name="game_finished_victory_text">Congratulations! \n You won!</string>
     <string name="game_finished_loose_text">Oh no! \n Better luck next time!</string>
     <string name="game_finished_placeholder">Game Over! \n Try again to do better!</string>
-    <string name="restart_btn">Play Again?</string>
+    <string name="restart_btn">Play Again</string>
     <string name="main_menu_btn">Back to menu</string>
     <string name="single_leaderboard_nav">1 Player</string>
     <string name="multi_leaderboard_nav">2 Player</string>

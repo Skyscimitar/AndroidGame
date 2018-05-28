@@ -114,10 +114,9 @@
     <include
         android:id="@+id/dialog_layout"
         layout="@layout/game_ended_dialog"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/game_ended_dialog_width"
         android:layout_height="@dimen/restart_dialog_size"
         android:layout_centerInParent="true"
-        android:minWidth="@dimen/restart_dialog_size"
         android:visibility="gone" />
 
 </RelativeLayout>
