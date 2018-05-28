@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class SingleLeaderboardFrament extends Fragment{
 
     FirebaseDatabase mDatabase;
-    DatabaseManager dm;
     ArrayList<User> userList = new ArrayList<>();
     SingleLeaderBoardArrayAdapter adapter;
     ListView userListView;
