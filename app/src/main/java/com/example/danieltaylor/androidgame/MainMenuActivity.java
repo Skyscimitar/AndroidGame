@@ -8,11 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.danieltaylor.androidgame.firebase.DatabaseManager;
+import com.example.danieltaylor.androidgame.firebase.User;
 import com.example.danieltaylor.androidgame.leaderboard.LeaderboardActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -22,13 +26,22 @@ public class MainMenuActivity extends AppCompatActivity {
     Button btnSignOut;
     FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
+    FirebaseDatabase mDatabase;
+    DatabaseManager dm;
+    FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+
+
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
+        dm = new DatabaseManager(mDatabase);
+        mUser = mAuth.getCurrentUser();
+        dm.preparpeUser(mUser.getUid());
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
@@ -66,6 +79,8 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        addUserToDb();
     }
 
     //TODO leaderboard activity
@@ -82,5 +97,21 @@ public class MainMenuActivity extends AppCompatActivity {
 
     //TODO mulitgame activity
     private void goToMultiPlayerGame(){}
+
+
+    /**
+     * add the new user to the db if it doesnt' exist
+     */
+    private void addUserToDb(){
+        if (dm.getUser() == null) {
+            User user = new User();
+            user.setId(mUser.getUid());
+            user.setEmail(mUser.getEmail());
+            user.setSinglePlayerScore(0);
+            user.setMultiPlayerScore(0);
+            user.setName(mUser.getDisplayName());
+            dm.updateUserOnSignIn(user);
+        }
+    }
 
 }

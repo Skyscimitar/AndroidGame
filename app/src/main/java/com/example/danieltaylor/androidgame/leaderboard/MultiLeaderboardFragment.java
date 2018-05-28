@@ -8,15 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.danieltaylor.androidgame.R;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MultiLeaderboardFragment extends Fragment {
+
+    FirebaseDatabase mDatabase;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //just change the fragment_dashboard
-        //with the fragment you want to inflate
-        //like if the class is HomeFragment it should have R.layout.home_fragment
-        //if it is DashboardFragment it should have R.layout.fragment_dashboard
         return inflater.inflate(R.layout.multi_leaderboard_fragment, null);
     }
 }
