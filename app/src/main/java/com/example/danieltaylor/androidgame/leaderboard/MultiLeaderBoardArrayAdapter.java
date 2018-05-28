@@ -1,6 +1,7 @@
 package com.example.danieltaylor.androidgame.leaderboard;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -18,11 +19,13 @@ public class MultiLeaderBoardArrayAdapter extends ArrayAdapter<User> {
 
     private Context mContext;
     private ArrayList<User> userList;
+    Resources res;
 
     public MultiLeaderBoardArrayAdapter(@NonNull Context context, ArrayList<User> list){
         super(context, 0, list);
         this.mContext = context;
         this.userList = list;
+        res = context.getResources();
     }
 
     @NonNull
@@ -35,9 +38,9 @@ public class MultiLeaderBoardArrayAdapter extends ArrayAdapter<User> {
 
         TextView name = listItem.findViewById(R.id.leaderboard_user_name);
         TextView score = listItem.findViewById(R.id.leaderboard_user_score);
-
-        name.setText(userList.get(position).getName());
-        score.setText(userList.get(position).getMultiPlayerScore());
+        User u = userList.get(position);
+        name.setText(res.getString(R.string.leaderboard_player_name, u.getName()));
+        score.setText(res.getString(R.string.leaderboard_player_score, u.getMultiPlayerScore()));
 
         return listItem;
     }

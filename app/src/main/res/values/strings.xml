@@ -34,5 +34,9 @@
     <string name="single_leaderboard_nav">1 Player</string>
     <string name="multi_leaderboard_nav">2 Player</string>
     <string name="leaderboard_title">Leaderboard</string>
+    <string name="player_name_placeholder">Name</string>
+    <string name="player_score_placeholder">100</string>
+    <string name="leaderboard_player_name">Username: \n %1$s</string>
+    <string name="leaderboard_player_score">Score: \n %1$d</string>
 
 </resources>

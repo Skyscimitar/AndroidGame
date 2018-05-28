@@ -77,42 +77,6 @@ public class DatabaseManager {
         });
     }
 
-    public void prepareSingleLeaderBoard() {
-        ref = mDatabase.getReference("User");
-        Query query = ref.orderByChild("singlePlayerScore");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                singleLeaderBoard.clear();
-                for (DataSnapshot ds:dataSnapshot.getChildren()) {
-                    singleLeaderBoard.add(ds.getValue(User.class));
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
-
-    public void prepareMultiLeaderBoard() {
-        ref = mDatabase.getReference("User");
-        Query query = ref.orderByChild("multiPlayerScore");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                multiLeaderBoard.clear();
-                for (DataSnapshot ds:dataSnapshot.getChildren()) {
-                    multiLeaderBoard.add(ds.getValue(User.class));
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 
     /**
      * update the user in the db when the user signs in
