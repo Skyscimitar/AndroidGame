@@ -1,5 +1,6 @@
 package com.example.danieltaylor.androidgame.leaderboard;
 
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,8 @@ import android.view.MenuItem;
 import com.example.danieltaylor.androidgame.R;
 
 public class LeaderboardActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+
+    MediaPlayer music;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,10 @@ public class LeaderboardActivity extends AppCompatActivity implements BottomNavi
 
         BottomNavigationView navigationView = findViewById(R.id.leaderboard_btm_nav);
         navigationView.setOnNavigationItemSelectedListener(this);
+
+        music = MediaPlayer.create(getApplicationContext(), R.raw.leaderboard);
+        music.setLooping(true);
+        music.start();
     }
 
     @Override
@@ -62,5 +69,17 @@ public class LeaderboardActivity extends AppCompatActivity implements BottomNavi
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        music.pause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        music.start();
     }
 }
