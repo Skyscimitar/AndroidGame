@@ -7,6 +7,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,7 @@ public class CharacterSelectionActivity extends AppCompatActivity {
     View character4;
     Button characterSelectionButton;
     MediaPlayer music;
+    private static String TAG = "CSA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,53 +90,31 @@ public class CharacterSelectionActivity extends AppCompatActivity {
         characterSelectionButton = findViewById(R.id.btn_confirm_character);
         music = MediaPlayer.create(CharacterSelectionActivity.this, R.raw.battle);
 
-        //TODO fix onClickListeners activiting multiple views at the same time
-
         character1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (characterSelected == 1) {
-                    unSelectCharacter(1);
-                } else {
-                    unSelectCharacter(characterSelected);
-                    selectCharacter(3);
-                }
+                toggleCharacterSelection(1);
             }
         });
 
         character2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (characterSelected == 2) {
-                    unSelectCharacter(2);
-                } else {
-                    unSelectCharacter(characterSelected);
-                    selectCharacter(2);
-                }
+                toggleCharacterSelection(2);
             }
         });
 
         character3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (characterSelected == 3) {
-                    unSelectCharacter(3);
-                } else {
-                    unSelectCharacter(characterSelected);
-                    selectCharacter(3);
-                }
+                toggleCharacterSelection(3);
             }
         });
 
         character4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (characterSelected == 4) {
-                    unSelectCharacter(4);
-                } else {
-                    unSelectCharacter(characterSelected);
-                    selectCharacter(4);
-                }
+                toggleCharacterSelection(4);
             }
         });
 
@@ -170,34 +150,54 @@ public class CharacterSelectionActivity extends AppCompatActivity {
 
     private void selectCharacter(int number) {
 
-        this.characterSelected = number;
-        Toast.makeText(getApplicationContext(),
-                "selected character " + Integer.toString(characterSelected),
-                Toast.LENGTH_SHORT).show();
-
         switch(number) {
             case 1:
+                Log.e(TAG, "changing background on");
                 character1.setBackgroundResource(R.drawable.character_selected_character_background_border);
+                break;
             case 2:
                 character2.setBackgroundResource(R.drawable.character_selected_character_background_border);
+                break;
             case 3:
                 character3.setBackgroundResource(R.drawable.character_selected_character_background_border);
+                break;
             case 4:
                 character4.setBackgroundResource(R.drawable.character_selected_character_background_border);
+                break;
         }
     }
 
     private void unSelectCharacter(int number) {
-        this.characterSelected = 0;
         switch(number) {
             case 1:
+                Log.e(TAG, "changing background unselected");
                 character1.setBackgroundResource(R.drawable.character_selection_background_border);
+                break;
             case 2:
                 character2.setBackgroundResource(R.drawable.character_selection_background_border);
+                break;
             case 3:
                 character3.setBackgroundResource(R.drawable.character_selection_background_border);
+                break;
             case 4:
                 character4.setBackgroundResource(R.drawable.character_selection_background_border);
+                break;
+        }
+    }
+
+    private void toggleCharacterSelection(int number){
+        if (this.characterSelected == number) {
+            Log.e(TAG, "unselected " + Integer.toString(number));
+            this.characterSelected = 0;
+            unSelectCharacter(number);
+        } else {
+            if (characterSelected != 0) {
+                unSelectCharacter(characterSelected);
+                Log.e(TAG, "unselecting " + Integer.toString(characterSelected));
+            }
+            Log.e(TAG, "selected" + Integer.toString(number));
+            this.characterSelected = number;
+            selectCharacter(number);
         }
     }
 

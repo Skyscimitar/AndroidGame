@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,13 +12,12 @@
         android:id="@+id/character1"
         android:layout_width="@dimen/character_selection_frame_size"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/character2"
-        android:layout_marginEnd="14dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_margin="@dimen/character_selection_margin"
         android:background="@drawable/character_selection_background_border"
-        android:minHeight="@dimen/character_selection_frame_size"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="116dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/character1_image"
@@ -30,45 +29,45 @@
             android:contentDescription="@string/character_image_placeholder" />
 
         <TextView
-            android:textStyle="bold"
-            android:textColor="@color/colorSecondaryDark"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter1_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="@string/character_name_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_name_placeholder"
+            android:textColor="@color/colorSecondaryDark"
+            android:textStyle="bold" />
 
         <TextView
-            android:textColor="@color/colorSecondary"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter1_atk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/character1_image"
-            android:text="@string/character_stat_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_stat_placeholder"
+            android:textColor="@color/colorSecondary" />
 
         <TextView
-            android:textColor="@color/colorSecondary"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter1_dfs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/characeter1_atk"
-            android:text="@string/character_stat_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_stat_placeholder"
+            android:textColor="@color/colorSecondary" />
 
         <TextView
-            android:textColor="@color/colorSecondary"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter1_spd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/characeter1_dfs"
-            android:text="@string/character_stat_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_stat_placeholder"
+            android:textColor="@color/colorSecondary" />
 
 
     </RelativeLayout>
@@ -79,12 +78,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="138dp"
-        android:layout_marginStart="19dp"
+        android:layout_margin="@dimen/character_selection_margin"
         android:background="@drawable/character_selection_background_border"
         android:minHeight="@dimen/character_selection_frame_size"
-        tools:layout_editor_absoluteX="276dp"
-        tools:layout_editor_absoluteY="260dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/character4">
 
         <ImageView
             android:id="@+id/character2_image"
@@ -96,45 +94,45 @@
             android:contentDescription="@string/character_image_placeholder" />
 
         <TextView
-            android:textStyle="bold"
-            android:textColor="@color/colorSecondaryDark"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter2_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="@string/character_name_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_name_placeholder"
+            android:textColor="@color/colorSecondaryDark"
+            android:textStyle="bold" />
 
         <TextView
-            android:textColor="@color/colorSecondary"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter2_atk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/character2_image"
-            android:text="@string/character_stat_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_stat_placeholder"
+            android:textColor="@color/colorSecondary" />
 
         <TextView
-            android:textColor="@color/colorSecondary"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter2_dfs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/characeter2_atk"
-            android:text="@string/character_stat_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_stat_placeholder"
+            android:textColor="@color/colorSecondary" />
 
         <TextView
-            android:textColor="@color/colorSecondary"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter2_spd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/characeter2_dfs"
-            android:text="@string/character_stat_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_stat_placeholder"
+            android:textColor="@color/colorSecondary" />
 
     </RelativeLayout>
 
@@ -142,13 +140,13 @@
         android:id="@+id/character3"
         android:layout_width="@dimen/character_selection_frame_size"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/character_selection_frame_size"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/character2"
-        android:layout_marginTop="13dp"
+        android:layout_margin="@dimen/character_selection_margin"
         android:background="@drawable/character_selection_background_border"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="8dp">
+        android:minHeight="@dimen/character_selection_frame_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/character1">
 
         <ImageView
             android:id="@+id/character3_image"
@@ -160,45 +158,45 @@
             android:contentDescription="@string/character_image_placeholder" />
 
         <TextView
-            android:textStyle="bold"
-            android:textColor="@color/colorSecondaryDark"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter3_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="@string/character_name_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_name_placeholder"
+            android:textColor="@color/colorSecondaryDark"
+            android:textStyle="bold" />
 
         <TextView
-            android:textColor="@color/colorSecondary"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter3_atk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/character3_image"
-            android:text="@string/character_stat_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_stat_placeholder"
+            android:textColor="@color/colorSecondary" />
 
         <TextView
-            android:textColor="@color/colorSecondary"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter3_dfs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/characeter3_atk"
-            android:text="@string/character_stat_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_stat_placeholder"
+            android:textColor="@color/colorSecondary" />
 
         <TextView
-            android:textColor="@color/colorSecondary"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter3_spd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/characeter3_dfs"
-            android:text="@string/character_stat_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_stat_placeholder"
+            android:textColor="@color/colorSecondary" />
 
 
     </RelativeLayout>
@@ -207,10 +205,11 @@
         android:id="@+id/character4"
         android:layout_width="@dimen/character_selection_frame_size"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/character_selection_frame_size"
         android:layout_alignStart="@+id/character1"
         android:layout_alignTop="@+id/character3"
+        android:layout_margin="@dimen/character_selection_margin"
         android:background="@drawable/character_selection_background_border"
+        android:minHeight="@dimen/character_selection_frame_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -224,45 +223,45 @@
             android:contentDescription="@string/character_image_placeholder" />
 
         <TextView
-            android:textStyle="bold"
-            android:textColor="@color/colorSecondaryDark"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter4_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="@string/character_name_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_name_placeholder"
+            android:textColor="@color/colorSecondaryDark"
+            android:textStyle="bold" />
 
         <TextView
-            android:textColor="@color/colorSecondary"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter4_atk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/character4_image"
-            android:text="@string/character_stat_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_stat_placeholder"
+            android:textColor="@color/colorSecondary" />
 
         <TextView
-            android:textColor="@color/colorSecondary"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter4_dfs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/characeter4_atk"
-            android:text="@string/character_stat_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_stat_placeholder"
+            android:textColor="@color/colorSecondary" />
 
         <TextView
-            android:textColor="@color/colorSecondary"
-            android:layout_margin="@dimen/character_selection_text_margin"
             android:id="@+id/characeter4_spd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/characeter4_dfs"
-            android:text="@string/character_stat_placeholder" />
+            android:layout_margin="@dimen/character_selection_text_margin"
+            android:text="@string/character_stat_placeholder"
+            android:textColor="@color/colorSecondary" />
 
     </RelativeLayout>
 
@@ -272,7 +271,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="80dp"
-        android:text="@string/btn_confirm_character"/>
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/btn_confirm_character"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
