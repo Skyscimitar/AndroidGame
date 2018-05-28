@@ -119,4 +119,26 @@ public class DatabaseManager {
         });
     }
 
+    /**
+     * allow the user to update his name
+     * @param user
+     */
+    public void updateUserName(final User user){
+        ref = mDatabase.getReference("User");
+        Query query = ref.child(user.getId());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User u = dataSnapshot.getValue(User.class);
+                u.setName(user.getName());
+                ref.child(user.getId()).setValue(u);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }

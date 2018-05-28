@@ -39,5 +39,9 @@
     <string name="leaderboard_player_name">Username: \n %1$s</string>
     <string name="leaderboard_player_score">Score: \n %1$d</string>
     <string name="btn_profile_page">Profile</string>
+    <string name="profile_name_hint">YourName</string>
+    <string name="profile_name_text">You can change the name others will see on the
+    leader board here if you want</string>
+    <string name="profile_save_button">Save</string>
 
 </resources>

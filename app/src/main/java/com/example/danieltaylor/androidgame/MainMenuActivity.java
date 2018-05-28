@@ -1,6 +1,7 @@
 package com.example.danieltaylor.androidgame;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.example.danieltaylor.androidgame.firebase.DatabaseManager;
 import com.example.danieltaylor.androidgame.firebase.User;
 import com.example.danieltaylor.androidgame.leaderboard.LeaderboardActivity;
+import com.example.danieltaylor.androidgame.profile.ProfileActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -24,6 +26,7 @@ public class MainMenuActivity extends AppCompatActivity {
     Button btnMultiPlayer;
     Button btnLeaderBoard;
     Button btnSignOut;
+    Button btnProfile;
     FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseDatabase mDatabase;
@@ -34,8 +37,6 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-
-
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
@@ -49,6 +50,7 @@ public class MainMenuActivity extends AppCompatActivity {
         btnMultiPlayer = findViewById(R.id.btn_multiplayer);
         btnLeaderBoard = findViewById(R.id.btn_leaderboard);
         btnSignOut = findViewById(R.id.btn_signout);
+        btnProfile = findViewById(R.id.btn_profile);
 
         btnSinglePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +70,13 @@ public class MainMenuActivity extends AppCompatActivity {
                 goToLeaderboard();
             }
         });
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToProfile();
+            }
+        });
+
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,13 +91,11 @@ public class MainMenuActivity extends AppCompatActivity {
         dm.registerUser(mUser);
     }
 
-    //TODO leaderboard activity
     private void goToLeaderboard(){
         Intent intent = new Intent(getApplicationContext(), LeaderboardActivity.class);
         startActivity(intent);
     }
 
-    //TODO singlegame activity
     private void goToSinglePlayerGame(){
         Intent intent = new Intent(getApplicationContext(), CharacterSelectionActivity.class);
         startActivity(intent);
@@ -97,9 +104,10 @@ public class MainMenuActivity extends AppCompatActivity {
     //TODO mulitgame activity
     private void goToMultiPlayerGame(){}
 
+    private void goToProfile(){
+        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        startActivity(intent);
+    }
 
-    /**
-     * add the new user to the db if it doesnt' exist
-     */
 
 }

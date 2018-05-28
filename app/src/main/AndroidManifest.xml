@@ -27,7 +27,8 @@
         <activity
             android:name=".leaderboard.LeaderboardActivity"
             android:parentActivityName=".MainMenuActivity" />
-        <activity android:name=".profile.ProfileActivity"></activity>
+        <activity android:name=".profile.ProfileActivity"
+            android:parentActivityName=".MainMenuActivity"/>
     </application>
 
 </manifest>

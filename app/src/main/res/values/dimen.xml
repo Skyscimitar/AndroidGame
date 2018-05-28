@@ -21,5 +21,11 @@
     <dimen name="game_ended_text_size">30sp</dimen>
     <dimen name="game_ended_button_paddng">5dp</dimen>
     <dimen name="game_ended_dialog_width">300dp</dimen>
+    <dimen name="profile_text_size">20sp</dimen>
+    <dimen name="profile_save_button_padding">10dp</dimen>
+    <dimen name="profile_name_width">150dp</dimen>
+    <dimen name="profile_name_padding">10dp</dimen>
+    <dimen name="profile_text_margin_sides">100dp</dimen>
+    <dimen name="profile_text_margin_updown">15dp</dimen>
 
 </resources>
