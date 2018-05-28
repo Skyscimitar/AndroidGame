@@ -20,13 +20,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Because the thread isn't also a view, can't update the ui, a solution would be
+ * to run it on the uiThread but that isn't great
+ * instead we pass the activity to the thread, we then let the activity handle all ui updates
+ * on the ui thread and keep the logic seperate
+ */
 public class SinglePlayerGameThread implements Runnable {
 
     ArrayList<String> actions = new ArrayList<>();
 
     private Player aiPlayer;
     private Player userPlayer;
-    public boolean isRunning;
+    private boolean isRunning;
     private JSONObject gameData;
     private SinglePlayerGame game;
     private Thread gameThread;
@@ -34,8 +40,8 @@ public class SinglePlayerGameThread implements Runnable {
     private boolean aiPlayerActed = false;
     private String userPlayerAction;
     private String aiPlayerAction;
-    private ArrayList<Player> playerArrayList = new ArrayList<>();
-    public SinglePlayerGameActivity activity;
+    ArrayList<Player> playerArrayList = new ArrayList<>();
+    private SinglePlayerGameActivity activity;
     SurfaceView enemyHealth;
     SurfaceView playerHealth;
     private Resources res;
@@ -44,8 +50,6 @@ public class SinglePlayerGameThread implements Runnable {
     private Button attack_btn;
     private Button defend_btn;
     private Button heal_btn;
-    private TextView playerCharacterHealth;
-    private TextView aiCharacterHealth;
     private Random random = new Random();
 
     public SinglePlayerGameThread(SinglePlayerGameActivity activity, Resources res, Player userPlayer,
@@ -66,10 +70,6 @@ public class SinglePlayerGameThread implements Runnable {
         attack_btn = activity.attack_btn;
         defend_btn = activity.defend_btn;
         heal_btn = activity.heal_btn;
-
-        playerCharacterHealth = activity.playerCharacterHealth;
-        aiCharacterHealth = activity.enemyCharacterHealth;
-
 
         //set onClickListeners to register the user's controls.
         attack_btn.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +113,7 @@ public class SinglePlayerGameThread implements Runnable {
             draw();
             control();
         }
+        return;
     }
 
     //allows player turns to be taken
@@ -121,32 +122,32 @@ public class SinglePlayerGameThread implements Runnable {
         if (game.isGameOver()) {
             isRunning = false;
             endGame(game.getWinner());
-        }
-        // if the player inputted an action and it is his turn, update the gameData;
-        if (userPlayerActed && game.isPlayerTurn(userPlayer)) {
-            userPlayerActed = false;
-            game.takeTurn(userPlayer, userPlayerAction);
-            userPlayer = game.updatePlayer(userPlayer);
-        }
+        } else {
+            // if the player inputted an action and it is his turn, update the gameData;
+            if (userPlayerActed && game.isPlayerTurn(userPlayer)) {
+                userPlayerActed = false;
+                game.takeTurn(userPlayer, userPlayerAction);
+                userPlayer = game.updatePlayer(userPlayer);
+            }
 
-        //if the aiplayer inputted an action and it is his turn, update the gameData
-        if (aiPlayerActed && game.isPlayerTurn(aiPlayer)) {
-            aiPlayerActed = false;
-            game.takeTurn(aiPlayer, aiPlayerAction);
-            aiPlayer = game.updatePlayer(aiPlayer);
-        }
+            //if the aiplayer inputted an action and it is his turn, update the gameData
+            if (aiPlayerActed && game.isPlayerTurn(aiPlayer)) {
+                aiPlayerActed = false;
+                game.takeTurn(aiPlayer, aiPlayerAction);
+                aiPlayer = game.updatePlayer(aiPlayer);
+            }
 
-        //if it's the ai turn, take a random action
-        if(game.isPlayerTurn(aiPlayer)) {
-            int ai = random.nextInt(3);
-            aiPlayerAction = actions.get(ai);
-            aiPlayerActed = true;
+            //if it's the ai turn, take a random action
+            if (game.isPlayerTurn(aiPlayer)) {
+                int ai = random.nextInt(3);
+                aiPlayerAction = actions.get(ai);
+                aiPlayerActed = true;
+            }
         }
     }
 
     //updates the game view
     private void draw() {
-        //update the ui based on the current game state
         //update user player
         activity.updateUserPlayer(userPlayer);
 
@@ -182,14 +183,10 @@ public class SinglePlayerGameThread implements Runnable {
 
 
     private void endGame(Player winner){
-        Log.e("GT", "Game end fct called");
-        try {
-            Looper.prepare();
-            activity.endGame(winner);
-            gameThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Looper.prepare();
+        activity.endGame(winner);
+        isRunning = false;
+
     }
 
     public void onResume() {
@@ -207,15 +204,11 @@ public class SinglePlayerGameThread implements Runnable {
 
     //prevent the user from acting
     private void disableInput() {
-        attack_btn.setClickable(false);
-        defend_btn.setClickable(false);
-        heal_btn.setClickable(false);
+        activity.disableInput();
     }
 
     private void enableInput() {
-        attack_btn.setClickable(true);
-        defend_btn.setClickable(true);
-        heal_btn.setClickable(true);
+        activity.enableInput();
     }
 
 }

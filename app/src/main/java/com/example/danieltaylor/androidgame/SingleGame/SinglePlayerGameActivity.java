@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,11 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
     Button attack_btn;
     Button defend_btn;
     Button heal_btn;
+
+    RelativeLayout dialogLayout;
+    Button btnRestart;
+    Button btnMainMenu;
+    TextView gameEndText;
 
 
 
@@ -102,6 +108,25 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
         attack_btn = findViewById(R.id.btn_attack);
         defend_btn = findViewById(R.id.btn_defend);
         heal_btn = findViewById(R.id.btn_heal);
+
+        dialogLayout = findViewById(R.id.dialog_layout);
+        btnRestart = dialogLayout.findViewById(R.id.restart_button);
+        btnMainMenu = dialogLayout.findViewById(R.id.main_menu_btn);
+        gameEndText = dialogLayout.findViewById(R.id.game_finished_text);
+
+        btnRestart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restartGame();
+            }
+        });
+
+        btnMainMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainMenu();
+            }
+        });
 
         gameThread = new SinglePlayerGameThread(SinglePlayerGameActivity.this, res, userPlayer,
                 aiPlayer);
@@ -193,33 +218,12 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                final Dialog dialog = new Dialog(SinglePlayerGameActivity.this);
-                dialog.setContentView(R.layout.game_ended_dialog);
-                final TextView endGameText = dialog.findViewById(R.id.game_finished_text);
-                final Button restartBtn = dialog.findViewById(R.id.restart_button);
-                final Button mainMenuBtn = dialog.findViewById(R.id.main_menu_btn);
-                if (winner.getPlayerID().equals(userPlayer.getPlayerID())) {
-                    endGameText.setText(res.getString(R.string.game_finished_victory_text));
+                if (userPlayer.getPlayerID().equals(winner.getPlayerID())) {
+                    gameEndText.setText(res.getString(R.string.game_finished_victory_text));
                 } else {
-                    endGameText.setText(res.getString(R.string.game_finished_loose_text));
+                    gameEndText.setText(res.getString(R.string.game_finished_loose_text));
                 }
-                restartBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        SinglePlayerGameActivity.this.restartGame();
-                    }
-                });
-
-                mainMenuBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        SinglePlayerGameActivity.this.mainMenu();
-                    }
-                });
-
-                dialog.show();
+                dialogLayout.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -240,13 +244,47 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
 
         //start a new Game with the same character
         music.start();
+        //hide the dialogWindow
+        dialogLayout.setVisibility(View.GONE);
         gameThread.onStart();
     }
 
     protected void mainMenu() {
         //return the user to the main menu
-        Intent intent = new Intent(SinglePlayerGameActivity.this, MainMenuActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+        //hide the dialog window
+        dialogLayout.setVisibility(View.GONE);
         startActivity(intent);
+    }
+
+    //enable the input for the user
+    protected void enableInput() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                attack_btn.setClickable(true);
+                attack_btn.setEnabled(true);
+                defend_btn.setClickable(true);
+                defend_btn.setEnabled(true);
+                heal_btn.setClickable(true);
+                heal_btn.setEnabled(true);
+            }
+        });
+    }
+
+    //disable the input for the user
+    protected void disableInput() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                attack_btn.setClickable(false);
+                attack_btn.setEnabled(false);
+                defend_btn.setClickable(false);
+                defend_btn.setEnabled(false);
+                heal_btn.setClickable(false);
+                heal_btn.setEnabled(false);
+            }
+        });
     }
 
 

@@ -14,4 +14,5 @@
     <dimen name="action_button_bar_height">100dp</dimen>
     <dimen name="name_and_health_margin">20dp</dimen>
     <dimen name="name_and_health_padding">3dp</dimen>
+    <dimen name="restart_dialog_size">200dp</dimen>
 </resources>
