@@ -20,6 +20,7 @@
         android:background="@color/colorSecondaryDark"
         app:itemTextColor="@color/colorPrimaryDark"
         app:itemIconTint="@color/colorPrimaryDark"
-        android:id="@+id/leaderboard_btm_nav"/>
+        android:id="@+id/leaderboard_btm_nav"
+        app:menu="@menu/leaderboard_nav_btm_menu"/>
 
 </RelativeLayout>
