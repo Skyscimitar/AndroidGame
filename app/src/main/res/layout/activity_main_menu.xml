@@ -13,36 +13,48 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="83dp"
         android:padding="@dimen/btn_padding"
+        android:layout_margin="@dimen/btn_margin"
         android:text="@string/btn_singleplayer" />
 
     <Button
         android:id="@+id/btn_multiplayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="156dp"
+        android:layout_below="@id/btn_singleplayer"
         android:padding="@dimen/btn_padding"
+        android:layout_margin="@dimen/btn_margin"
         android:text="@string/btn_multiplayer" />
 
     <Button
         android:id="@+id/btn_leaderboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_multiplayer"
+        android:layout_margin="@dimen/btn_margin"
         android:padding="@dimen/btn_padding"
         android:text="@string/btn_leaderboard" />
+
+    <Button
+        android:id="@+id/btn_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_leaderboard"
+        android:layout_margin="@dimen/btn_margin"
+        android:padding="@dimen/btn_padding"
+        android:text="@string/btn_profile_page" />
 
 
     <Button
         android:id="@+id/btn_signout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/btn_profile"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="151dp"
+        android:layout_margin="@dimen/btn_margin"
         android:padding="@dimen/btn_padding"
         android:text="@string/btn_signout" />
 

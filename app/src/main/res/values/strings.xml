@@ -38,5 +38,6 @@
     <string name="player_score_placeholder">100</string>
     <string name="leaderboard_player_name">Username: \n %1$s</string>
     <string name="leaderboard_player_score">Score: \n %1$d</string>
+    <string name="btn_profile_page">Profile</string>
 
 </resources>

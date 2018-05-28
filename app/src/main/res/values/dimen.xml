@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="btn_magin">20dp</dimen>
+    <dimen name="btn_margin">20dp</dimen>
     <dimen name="btn_padding">20dp</dimen>
     <dimen name="text_entry_margin">100dp</dimen>
     <dimen name="text_entry_padding">50dp</dimen>
