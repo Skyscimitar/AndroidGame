@@ -17,6 +17,7 @@
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@color/colorSecondaryDark"
         app:itemTextColor="@color/colorPrimaryDark"
         app:itemIconTint="@color/colorPrimaryDark"

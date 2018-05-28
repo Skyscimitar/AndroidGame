@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.danieltaylor.androidgame.leaderboard.LeaderboardActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -68,7 +69,10 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     //TODO leaderboard activity
-    private void goToLeaderboard(){}
+    private void goToLeaderboard(){
+        Intent intent = new Intent(getApplicationContext(), LeaderboardActivity.class);
+        startActivity(intent);
+    }
 
     //TODO singlegame activity
     private void goToSinglePlayerGame(){
