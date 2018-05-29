@@ -5,10 +5,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.danieltaylor.androidgame.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -31,16 +34,23 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
 
     public TurnBasedMatch mMatch;
     public Turn mTurnData;
-
+    ConstraintLayout layout;
+    ProgressBar spinner;
+    TextView searchForOpponentText;
+    Button btnStartMatch;
 
     private String mMyPlayerId; // TODO set ce truc, je sais pas trop ou
     private AlertDialog mAlertDialog;
+
+    //TODO make sure the game only ever has 2 players in it
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multi_player_game);
-        Button btnStartMatch = findViewById(R.id.start_match);
+        spinner = findViewById(R.id.matchmaking_spinner);
+        searchForOpponentText = findViewById(R.id.search_for_opponent_text);
+        btnStartMatch = findViewById(R.id.start_match);
         btnStartMatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +65,7 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
         if (requestCode == RC_SELECT_PLAYERS) {
             if (resultCode != Activity.RESULT_OK) {
                 // Canceled or other unrecoverable error
+                // TODO update the ui accordingly (error message) remove the spinner and text, redisplay the button
                 return;
             }
             ArrayList<String> invitees = data.getStringArrayListExtra(Games.EXTRA_PLAYER_IDS);
@@ -142,6 +153,9 @@ public class MultiPlayerGameActivity extends AppCompatActivity {
     }
 
     public void onStartMatchClicked(View view) {
+        btnStartMatch.setVisibility(View.GONE);
+        spinner.setVisibility(View.VISIBLE);
+        searchForOpponentText.setVisibility(View.VISIBLE);
         boolean allowAutoMatch = true;
         Games.getTurnBasedMultiplayerClient(this, GoogleSignIn.getLastSignedInAccount(this))
                 .getSelectOpponentsIntent(1, 2, allowAutoMatch)
