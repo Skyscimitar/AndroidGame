@@ -98,11 +98,20 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private void goToSinglePlayerGame(){
         Intent intent = new Intent(getApplicationContext(), CharacterSelectionActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("mode", "single");
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
     //TODO mulitgame activity
-    private void goToMultiPlayerGame(){}
+    private void goToMultiPlayerGame(){
+        Intent intent = new Intent(getApplicationContext(), CharacterSelectionActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("mode", "multi");
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 
     private void goToProfile(){
         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);

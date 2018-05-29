@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.danieltaylor.androidgame.multi_player_game.MultiPlayerGameActivity;
 import com.example.danieltaylor.androidgame.single_game.SinglePlayerGameActivity;
 
 public class CharacterSelectionActivity extends AppCompatActivity {
@@ -31,6 +32,8 @@ public class CharacterSelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_selection);
+
+        String mode = getIntent().getExtras().getString("mode");
 
         Resources res = getResources();
         //find the views
@@ -118,16 +121,29 @@ public class CharacterSelectionActivity extends AppCompatActivity {
             }
         });
 
-        characterSelectionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (characterSelected != 0) {
-                    Intent intent = new Intent(CharacterSelectionActivity.this, SinglePlayerGameActivity.class);
-                    intent.putExtra("character", characterSelected);
-                    startActivity(intent);
+        if(mode == "single") {
+            characterSelectionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (characterSelected != 0) {
+                        Intent intent = new Intent(CharacterSelectionActivity.this, SinglePlayerGameActivity.class);
+                        intent.putExtra("character", characterSelected);
+                        startActivity(intent);
+                    }
                 }
-            }
-        });
+            });
+        } else if (mode == "multi") {
+            characterSelectionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (characterSelected != 0) {
+                        Intent intent = new Intent(CharacterSelectionActivity.this, MultiPlayerGameActivity.class);
+                        intent.putExtra("character", characterSelected);
+                        startActivity(intent);
+                    }
+                }
+            });
+        }
 
         music.setLooping(true);
         music.start();
