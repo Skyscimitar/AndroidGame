@@ -99,7 +99,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private void goToSinglePlayerGame(){
         Intent intent = new Intent(getApplicationContext(), CharacterSelectionActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("mode", "single");
+        bundle.putString("KEY","single");
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -108,7 +108,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private void goToMultiPlayerGame(){
         Intent intent = new Intent(getApplicationContext(), CharacterSelectionActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("mode", "multi");
+        bundle.putString("KEY", "multi");
         intent.putExtras(bundle);
         startActivity(intent);
     }
