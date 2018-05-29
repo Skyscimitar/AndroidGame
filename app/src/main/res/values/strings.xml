@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_id">10908012892</string>
     <string name="app_name">Battle Monsters</string>
     <string name="btn_signin">Sign In</string>
     <string name="btn_signup">Sign Up</string>
