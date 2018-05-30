@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -48,6 +49,15 @@ public class MainMenuActivity extends AppCompatActivity {
 
         btnSinglePlayer = findViewById(R.id.btn_singleplayer);
         btnMultiPlayer = findViewById(R.id.btn_multiplayer);
+
+        for (UserInfo user: mAuth.getCurrentUser().getProviderData()) {
+            if (user.getProviderId().equals("google.com")) {
+                btnMultiPlayer.setVisibility(View.VISIBLE);
+            } else {
+                btnMultiPlayer.setVisibility(View.GONE);
+            }
+        }
+
         btnLeaderBoard = findViewById(R.id.btn_leaderboard);
         btnSignOut = findViewById(R.id.btn_signout);
         btnProfile = findViewById(R.id.btn_profile);
@@ -99,7 +109,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private void goToSinglePlayerGame(){
         Intent intent = new Intent(getApplicationContext(), CharacterSelectionActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("KEY","single");
+        bundle.putString("KEY", "single");
         intent.putExtras(bundle);
         startActivity(intent);
     }
