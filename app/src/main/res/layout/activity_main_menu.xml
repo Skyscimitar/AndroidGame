@@ -58,4 +58,14 @@
         android:padding="@dimen/btn_padding"
         android:text="@string/btn_signout" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_language_black_24dp"
+        android:tint="@color/colorSecondaryDark"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:backgroundTint="@color/colorSecondaryDark"
+        android:layout_margin="@dimen/language_margin"/>
+
 </RelativeLayout>
