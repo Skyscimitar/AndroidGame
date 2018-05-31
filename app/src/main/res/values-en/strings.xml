@@ -46,4 +46,7 @@
     <string name="search_opponent">Looking for opponent</string>
     <string name="app_id">10908012892</string>
     <string name="btn_heal">Heal</string>
+    <string name="fr">French</string>
+    <string name="en">English</string>
+    <string name="language_placeholder">Language</string>
 </resources>

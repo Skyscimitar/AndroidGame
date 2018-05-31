@@ -1,12 +1,23 @@
 package com.example.danieltaylor.androidgame;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.danieltaylor.androidgame.firebase.DatabaseManager;
@@ -21,6 +32,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Locale;
+
 public class MainMenuActivity extends AppCompatActivity {
 
     Button btnSinglePlayer;
@@ -33,6 +46,10 @@ public class MainMenuActivity extends AppCompatActivity {
     FirebaseDatabase mDatabase;
     DatabaseManager dm;
     FirebaseUser mUser;
+    ListView languageList;
+    ImageButton languageButton;
+
+    TextView txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +115,14 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        languageButton = findViewById(R.id.language_button);
+        languageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLanguageDialog();
+            }
+        });
+
         dm.registerUser(mUser);
     }
 
@@ -126,6 +151,47 @@ public class MainMenuActivity extends AppCompatActivity {
     private void goToProfile(){
         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
         startActivity(intent);
+    }
+
+
+    /**
+     * Allow the user to manually change language if they don't want to use the default locale of
+     * their device
+     * @param lang the new language (for now only fr & en supported)
+     */
+    private void setLocale(String lang){
+        Locale locale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = locale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(this, MainMenuActivity.class);
+        finish();
+        startActivity(refresh);
+    }
+
+
+    private void showLanguageDialog(){
+        final Dialog dialog = new Dialog(MainMenuActivity.this);
+        dialog.setContentView(R.layout.language_selection_dialog);
+        TextView fr = dialog.findViewById(R.id.fr);
+        TextView en = dialog.findViewById(R.id.en);
+        fr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLocale("fr");
+                dialog.dismiss();
+            }
+        });
+        en.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLocale("en");
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
 

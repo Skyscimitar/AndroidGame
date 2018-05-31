@@ -65,7 +65,8 @@
         android:tint="@color/colorSecondaryDark"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:id="@+id/language_button"
         android:backgroundTint="@color/colorSecondaryDark"
-        android:layout_margin="@dimen/language_margin"/>
+        android:layout_margin="@dimen/language_margin" />
 
 </RelativeLayout>
