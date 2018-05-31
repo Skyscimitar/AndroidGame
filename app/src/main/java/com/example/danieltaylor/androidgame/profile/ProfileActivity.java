@@ -1,5 +1,6 @@
 package com.example.danieltaylor.androidgame.profile;
 
+import android.media.MediaPlayer;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
     DatabaseManager dm;
     DatabaseReference ref;
     User u;
+    MediaPlayer mPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         userName = findViewById(R.id.profile_name);
         btnSave = findViewById(R.id.save_profile_button);
+
+        mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.leaderboard);
+        mPlayer.setLooping(true);
+        mPlayer.start();
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,5 +104,17 @@ public class ProfileActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "Please enter a name", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onPause(){
+        mPlayer.pause();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        mPlayer.start();
     }
 }
