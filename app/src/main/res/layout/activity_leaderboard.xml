@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LeaderboardActivity">
-    <ListView
-        android:id="@+id/leaderboard"
+    android:background="@color/activityBackground"
+    tools:context=".leaderboard.LeaderboardActivity">
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:id="@+id/leaderboard_fragment_container" />
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorSecondaryDark"
+        app:itemTextColor="@color/colorPrimaryDark"
+        app:itemIconTint="@color/colorPrimaryDark"
+        android:id="@+id/leaderboard_btm_nav"
+        app:menu="@menu/leaderboard_nav_btm_menu"/>
+
+</RelativeLayout>

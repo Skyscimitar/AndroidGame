@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/single_leaderboard_nav"
+        android:icon="@drawable/ic_single_leaderboard_24dp"
+        android:id="@+id/single_leaderboard_nav_btn"
+        />
+
+    <item
+        android:title="@string/multi_leaderboard_nav"
+        android:icon="@drawable/ic_multi_leaderboard_24dp"
+        android:id="@+id/multi_leaderboard_nav_btn"
+        />
+
+</menu>

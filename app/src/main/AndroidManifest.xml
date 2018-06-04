@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/launcher_character"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/launcher_character"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity">
@@ -20,12 +20,19 @@
         <activity
             android:name=".CharacterSelectionActivity"
             android:parentActivityName=".MainMenuActivity" />
-        <activity android:name=".LeaderboardActivity" />
         <activity
-            android:name=".SingleGame.SinglePlayerGameActivity"
-            android:theme="@style/generalnotitle">
-        </activity>
-        <activity android:name=".MultiPlayerGame.MultiPlayerGameActivity"></activity>
+            android:name=".single_game.SinglePlayerGameActivity"
+            android:theme="@style/generalnotitle" />
+        <activity android:name=".multi_player_game.MultiPlayerGameActivity" />
+        <activity
+            android:name=".leaderboard.LeaderboardActivity"
+            android:parentActivityName=".MainMenuActivity" />
+        <activity android:name=".profile.ProfileActivity"
+            android:parentActivityName=".MainMenuActivity"/>
+        <meta-data android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/app_id" />
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
     </application>
 
 </manifest>

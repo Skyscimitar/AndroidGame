@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="btn_magin">20dp</dimen>
+    <dimen name="btn_margin">20dp</dimen>
     <dimen name="btn_padding">20dp</dimen>
     <dimen name="text_entry_margin">100dp</dimen>
     <dimen name="text_entry_padding">50dp</dimen>
     <dimen name="character_selection_frame_size">150dp</dimen>
     <dimen name="character_selection_frame_margin">30dp</dimen>
     <dimen name="chareter_size_battle">200dp</dimen>
+    <dimen name="character_selection_image_size">90dp</dimen>
+    <dimen name="character_selection_text_margin">4dp</dimen>
+    <dimen name="text_input_min_width">100dp</dimen>
+    <dimen name="text_input_top_bottom_padding">5dp</dimen>
+    <dimen name="action_button_bar_height">100dp</dimen>
+    <dimen name="name_and_health_margin">20dp</dimen>
+    <dimen name="name_and_health_padding">3dp</dimen>
+    <dimen name="restart_dialog_size">200dp</dimen>
+    <dimen name="leaderboard_text_size">20sp</dimen>
+    <dimen name="leaderboard_text_margin">20dp</dimen>
+    <dimen name="character_selection_margin">15dp</dimen>
+    <dimen name="game_ended_text_size">30sp</dimen>
+    <dimen name="game_ended_button_paddng">5dp</dimen>
+    <dimen name="game_ended_dialog_width">300dp</dimen>
+    <dimen name="profile_text_size">20sp</dimen>
+    <dimen name="profile_save_button_padding">10dp</dimen>
+    <dimen name="profile_name_width">150dp</dimen>
+    <dimen name="profile_name_padding">10dp</dimen>
+    <dimen name="profile_text_margin_sides">100dp</dimen>
+    <dimen name="profile_text_margin_updown">15dp</dimen>
+    <dimen name="language_margin">7dp</dimen>
+    <dimen name="language_selection_margin">1dp</dimen>
+
 </resources>
