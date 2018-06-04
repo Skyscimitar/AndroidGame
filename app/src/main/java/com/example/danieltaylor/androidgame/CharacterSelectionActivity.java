@@ -34,7 +34,6 @@ public class CharacterSelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_selection);
-        String mode = getIntent().getExtras().getString("mode");
 
         mode = getIntent().getExtras().getString("KEY");
         Log.d(TAG, mode);
