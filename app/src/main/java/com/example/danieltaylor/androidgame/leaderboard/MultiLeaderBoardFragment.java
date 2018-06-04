@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.danieltaylor.androidgame.R;
 import com.example.danieltaylor.androidgame.firebase.User;
@@ -30,14 +31,15 @@ public class MultiLeaderBoardFragment extends Fragment {
     private ListView userListView;
     private ArrayList<User> userList = new ArrayList<>();
     private MultiLeaderBoardArrayAdapter adapter;
+    Query query;
+    ValueEventListener listener;
+    ProgressBar progressBar;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference ref = mDatabase.getReference("User");
-        Query query = ref.orderByChild("multiPlayerScore");
-        query.addValueEventListener(new ValueEventListener() {
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 updateUsers(dataSnapshot);
@@ -47,11 +49,26 @@ public class MultiLeaderBoardFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("SFL", "error recovering data");
             }
-        });
-
+        };
         View rootView =  inflater.inflate(R.layout.multi_leaderboard_fragment, null);
         userListView = rootView.findViewById(R.id.multi_leaderboard_list);
+        progressBar = rootView.findViewById(R.id.multi_progress);
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        progressBar.setVisibility(View.VISIBLE);
+        DatabaseReference ref = mDatabase.getReference("User");
+        query = ref.orderByChild("multiPlayerScore");
+        query.addValueEventListener(listener);
+    }
+
+    @Override
+    public void onPause() {
+        query.removeEventListener(listener);
+        super.onPause();
     }
 
     private void updateUsers(DataSnapshot dataSnapshot){
@@ -62,6 +79,7 @@ public class MultiLeaderBoardFragment extends Fragment {
         adapter = new MultiLeaderBoardArrayAdapter(getContext(), userList);
         userList = (ArrayList) reverse(userList);
         userListView.setAdapter(adapter);
+        progressBar.setVisibility(View.GONE);
     }
 
     public static <T> List<T> reverse(List<T> arrayList) {

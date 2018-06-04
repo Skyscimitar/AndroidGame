@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.danieltaylor.androidgame.R;
 import com.example.danieltaylor.androidgame.firebase.DatabaseManager;
@@ -29,14 +30,15 @@ public class SingleLeaderBoardFragment extends Fragment{
     ArrayList<User> userList = new ArrayList<>();
     SingleLeaderBoardArrayAdapter adapter;
     ListView userListView;
+    Query query;
+    ValueEventListener listener;
+    ProgressBar progressBar;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference ref = mDatabase.getReference("User");
-        Query query = ref.orderByChild("singlePlayerScore");
-        query.addValueEventListener(new ValueEventListener() {
+        View rootView =  inflater.inflate(R.layout.single_leaderboard_fragment, null);
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 updateUsers(dataSnapshot);
@@ -46,11 +48,30 @@ public class SingleLeaderBoardFragment extends Fragment{
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("SFL", "error recovering data");
             }
-        });
-
-        View rootView =  inflater.inflate(R.layout.single_leaderboard_fragment, null);
+        };
         userListView = rootView.findViewById(R.id.single_leaderboard_list);
+        progressBar = rootView.findViewById(R.id.single_progress);
         return rootView;
+    }
+
+    /**
+     * We need to override the onPause and onStart methods to make sure the app doesn't try and
+     * update the fragment views when they aren't active.
+     */
+    @Override
+    public void onStart(){
+        super.onStart();
+        progressBar.setVisibility(View.VISIBLE);
+        mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference ref = mDatabase.getReference("User");
+        query = ref.orderByChild("singlePlayerScore");
+        query.addValueEventListener(listener);
+    }
+
+    @Override
+    public void onPause(){
+        query.removeEventListener(listener);
+        super.onPause();
     }
 
 
@@ -63,6 +84,7 @@ public class SingleLeaderBoardFragment extends Fragment{
         //because firebase doesn't provide decreasing order, we have to reverse the list
         userList = (ArrayList) reverse(userList);
         userListView.setAdapter(adapter);
+        progressBar.setVisibility(View.GONE);
 
     }
 

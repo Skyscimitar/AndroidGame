@@ -33,7 +33,7 @@
     <string name="game_finished_victory_text">Congratulations!   You won!</string>
     <string name="game_finished_loose_text">Oh no!   Better luck next time!</string>
     <string name="game_finished_placeholder">Oh no!   Better luck next time!</string>
-    <string name="restart_btn">Oh no!   Better luck next time!</string>
+    <string name="restart_btn">Play Again</string>
     <string name="leaderboard_title">Leaderboard</string>
     <string name="player_name_placeholder">Name</string>
     <string name="leaderboard_player_name">Username:   %1$s</string>

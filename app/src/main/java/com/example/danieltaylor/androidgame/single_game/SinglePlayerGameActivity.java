@@ -3,6 +3,7 @@ package com.example.danieltaylor.androidgame.single_game;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,7 +48,7 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
     Button defend_btn;
     Button heal_btn;
 
-    RelativeLayout dialogLayout;
+    ConstraintLayout dialogLayout;
     Button btnRestart;
     Button btnMainMenu;
     TextView gameEndText;
@@ -250,6 +251,9 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
         //starting a new game, we want the user to be able to change character if they want to
         Intent intent = new Intent(getApplicationContext(), CharacterSelectionActivity.class);
         //hide the dialog
+        Bundle bundle = new Bundle();
+        bundle.putString("KEY", "single");
+        intent.putExtras(bundle);
         dialogLayout.setVisibility(View.GONE);
         startActivity(intent);
 
