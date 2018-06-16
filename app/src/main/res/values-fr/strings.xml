@@ -49,4 +49,6 @@
     <string name="fr">Français</string>
     <string name="en">Anglais</string>
     <string name="language_placeholder">Langue</string>
+    <string name="leaderboard_rank_placeholder">1</string>
+    <string name="leaderboard_rank_text">%i</string>
 </resources>

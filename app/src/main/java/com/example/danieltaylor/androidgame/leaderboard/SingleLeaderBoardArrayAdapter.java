@@ -38,10 +38,12 @@ public class SingleLeaderBoardArrayAdapter extends ArrayAdapter<User>{
             listItem = LayoutInflater.from(mContext).inflate(R.layout.leaderboard_item, parent, false);
         }
 
+        TextView rank = listItem.findViewById(R.id.leaderboard_rank);
         TextView name = listItem.findViewById(R.id.leaderboard_user_name);
         TextView score = listItem.findViewById(R.id.leaderboard_user_score);
 
         User u = userList.get(position);
+        rank.setText(Integer.toString(position + 1));
         name.setText(res.getString(R.string.leaderboard_player_name, u.getName()));
         score.setText(res.getString(R.string.leaderboard_player_score, u.getSinglePlayerScore()));
 
