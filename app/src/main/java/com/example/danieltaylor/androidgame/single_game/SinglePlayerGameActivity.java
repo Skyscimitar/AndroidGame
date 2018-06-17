@@ -3,12 +3,15 @@ package com.example.danieltaylor.androidgame.single_game;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
+import android.os.Handler;
+import android.os.HardwarePropertiesManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -53,7 +56,13 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
     Button btnMainMenu;
     TextView gameEndText;
 
+    ImageView playerAttack;
+    ImageView playerDefend;
+    ImageView playerHeal;
 
+    ImageView enemyAttack;
+    ImageView enemyDefend;
+    ImageView enemyHeal;
 
     Player userPlayer;
     Player aiPlayer;
@@ -61,6 +70,7 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
 
     private MediaPlayer music;
     public final static int MESSAGE_UPDATE_TEXT_CHILD_THREAD =1;
+    private final static long ANIMATION_DURATION = 500;
 
     private Random random = new Random();
 
@@ -125,6 +135,16 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
         btnRestart = dialogLayout.findViewById(R.id.restart_button);
         btnMainMenu = dialogLayout.findViewById(R.id.main_menu_btn);
         gameEndText = dialogLayout.findViewById(R.id.game_finished_text);
+
+
+        playerAttack = findViewById(R.id.player_attack);
+        playerDefend = findViewById(R.id.player_defend);
+        playerHeal = findViewById(R.id.player_heal);
+
+
+        enemyAttack = findViewById(R.id.enemy_attack);
+        enemyDefend = findViewById(R.id.enemy_defend);
+        enemyHeal = findViewById(R.id.enemy_heal);
 
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -295,6 +315,90 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
                 heal_btn.setEnabled(false);
             }
         });
+    }
+
+    protected void playerAnimation(final String action) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showPlayerAnimation(action);
+            }
+        });
+    }
+
+    private void showPlayerAnimation(String action) {
+        switch (action) {
+            case "ATTACK":
+                playerAttack.setVisibility(View.VISIBLE);
+                //hide the image after specified duration
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        playerAttack.setVisibility(View.GONE);
+                    }
+                }, ANIMATION_DURATION);
+            case "DEFEND":
+                playerDefend.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        playerDefend.setVisibility(View.GONE);
+                    }
+                }, ANIMATION_DURATION);
+                break;
+            case "HEAL":
+                playerHeal.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        playerHeal.setVisibility(View.GONE);
+                    }
+                }, ANIMATION_DURATION);
+                break;
+        }
+
+    }
+
+    protected void enemyAnimation(final String action) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showEnemyAnimation(action);
+            }
+        });
+    }
+
+
+    private void showEnemyAnimation(String action) {
+        switch (action) {
+            case "ATTACK":
+                enemyAttack.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        enemyAttack.setVisibility(View.GONE);
+                    }
+                }, ANIMATION_DURATION);
+                break;
+            case "DEFEND":
+                enemyDefend.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        enemyDefend.setVisibility(View.GONE);
+                    }
+                }, ANIMATION_DURATION);
+                break;
+            case "HEAL":
+                enemyHeal.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        enemyHeal.setVisibility(View.GONE);
+                    }
+                }, ANIMATION_DURATION);
+                break;
+        }
     }
 
 

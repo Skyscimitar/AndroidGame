@@ -119,6 +119,7 @@ public class SinglePlayerGameThread implements Runnable {
             // if the player inputted an action and it is his turn, update the gameData;
             if (userPlayerActed && game.isPlayerTurn(userPlayer)) {
                 userPlayerActed = false;
+                activity.playerAnimation(userPlayerAction);
                 game.takeTurn(userPlayer, userPlayerAction);
                 userPlayer = game.updatePlayer(userPlayer);
             }
@@ -126,6 +127,7 @@ public class SinglePlayerGameThread implements Runnable {
             //if the aiplayer inputted an action and it is his turn, update the gameData
             if (aiPlayerActed && game.isPlayerTurn(aiPlayer)) {
                 aiPlayerActed = false;
+                activity.enemyAnimation(aiPlayerAction);
                 game.takeTurn(aiPlayer, aiPlayerAction);
                 aiPlayer = game.updatePlayer(aiPlayer);
             }
