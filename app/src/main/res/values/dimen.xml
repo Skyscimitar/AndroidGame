@@ -29,5 +29,7 @@
     <dimen name="profile_text_margin_updown">15dp</dimen>
     <dimen name="language_margin">7dp</dimen>
     <dimen name="language_selection_margin">1dp</dimen>
+    <dimen name="animation_size">100dp</dimen>
+    <dimen name="animation_margin">50dp</dimen>
 
 </resources>
