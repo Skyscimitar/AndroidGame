@@ -69,8 +69,9 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
 
 
     private MediaPlayer music;
+    static String TAG = "SGA";
     public final static int MESSAGE_UPDATE_TEXT_CHILD_THREAD =1;
-    private final static long ANIMATION_DURATION = 500;
+    private final static long ANIMATION_DURATION = 400;
 
     private Random random = new Random();
 
@@ -327,6 +328,7 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
     }
 
     private void showPlayerAnimation(String action) {
+        Log.d(TAG, action);
         switch (action) {
             case "ATTACK":
                 playerAttack.setVisibility(View.VISIBLE);
@@ -337,6 +339,7 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
                         playerAttack.setVisibility(View.GONE);
                     }
                 }, ANIMATION_DURATION);
+                break;
             case "DEFEND":
                 playerDefend.setVisibility(View.VISIBLE);
                 new Handler().postDelayed(new Runnable() {
