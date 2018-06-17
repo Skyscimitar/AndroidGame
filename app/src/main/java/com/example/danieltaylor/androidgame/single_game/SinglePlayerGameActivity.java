@@ -371,7 +371,6 @@ public class SinglePlayerGameActivity extends AppCompatActivity {
         });
     }
 
-
     private void showEnemyAnimation(String action) {
         switch (action) {
             case "ATTACK":
